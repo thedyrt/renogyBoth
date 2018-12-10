@@ -24,10 +24,17 @@
     "flowtype"
   ],
   "rules": {
-    "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": 0,
-    "import/extensions": 0,
     "flowtype/define-flow-type": 1,
-    "flowtype/use-flow-type": 1
+    "flowtype/use-flow-type": 1,
+    "import/extensions": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 0,
+    "react/require-default-props" : 0
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
   }
 }

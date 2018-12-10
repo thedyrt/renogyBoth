@@ -33,6 +33,13 @@ esproposal.optional_chaining=enable
 esproposal.nullish_coalescing=enable
 
 module.system=haste
+
+module.name_mapper='^components\/?\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
+module.name_mapper='^components\/?\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^UI\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/UI/\1'
+module.name_mapper='^UI$' -> '<PROJECT_ROOT>/src/components/UI'
+
+
 module.system.haste.use_name_reducers=true
 # get basename
 module.system.haste.name_reducers='^.*/\([a-zA-Z0-9$_.-]+\.js\(\.flow\)?\)$' -> '\1'
