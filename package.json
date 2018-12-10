@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "flow": "node_modules/.bin/flow",
+    "lint": "node_modules/.bin/eslint src index.js App.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "lint": "node_modules/.bin/eslint src index.js App.js"
+    "test": "jest"
   },
   "dependencies": {
     "react": "16.6.1",
@@ -29,6 +30,8 @@
     "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.88.0",
+    "flow-typed": "^2.4.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
     "react-test-renderer": "16.6.1"
