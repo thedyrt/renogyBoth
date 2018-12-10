@@ -1,0 +1,3 @@
+rootProject.name = 'renogy_solar_booth'
+
+include ':app'
