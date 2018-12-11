@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
   * FONT SIZE
   */
   h1: {
-    fontSize: 30,
+    fontSize: 50,
   },
   h2: {
-    fontSize: 44,
+    fontSize: 40,
   },
   h3: {
-    fontSize: 20,
+    fontSize: 24,
   },
   body: {
-    fontSize: 14,
+    fontSize: 20,
   },
   h5: {
     fontSize: 12,
@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     paddingBottom: standards.paddingLarge,
   },
   mediumSpacing: {
-    paddingBottom: standards.padding,
+    paddingBottom: standards.paddingMedium,
   },
   smallSpacing: {
-    paddingBottom: standards.paddingSmall,
+    paddingBottom: standards.padding,
   },
 
   /*

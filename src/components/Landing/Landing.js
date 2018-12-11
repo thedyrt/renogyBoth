@@ -24,9 +24,26 @@ export default class Landing extends PureComponent<Props> {
             <View style={styles.form}>
               <Text
                 fontFamily="dosis"
+                fontWeight="semiBold"
                 fontSize="h2"
+                fontSpacing="large"
               >
                 ENTER TO WIN
+              </Text>
+              <Text
+                fontFamily="dosis"
+                fontSize="h1"
+                fontWeight="semiBold"
+                fontSpacing="large"
+              >
+                $6,000 SOLAR GIVEAWAY
+              </Text>
+              <Text
+                fontSize="h3"
+                fontSpacing="medium"
+                fontAlignment="center"
+              >
+                Every month for 12 months, Renogy is giving away a $500 Renogy gift card to one luck winner.
               </Text>
             </View>
           </View>

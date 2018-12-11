@@ -2,7 +2,8 @@
 
 import { StyleSheet } from 'react-native';
 
-import colors from '../../constants/colors';
+import colors from 'constants/colors';
+import standards from 'constants/standards';
 
 export default StyleSheet.create({
   appContainer: {
@@ -17,9 +18,14 @@ export default StyleSheet.create({
   body: {
     flex: 4,
     backgroundColor: 'yellow',
+    marginHorizontal: standards.gutter,
+    marginTop: standards.offsetTop,
   },
   form: {
     backgroundColor: colors.primaryMuted,
+    alignItems: 'center',
+    paddingTop: standards.offsetTop,
+    paddingHorizontal: standards.gutter,
   },
   footer: {
     flex: 1,
