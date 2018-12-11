@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   * FONT TYPE
   */
   dosis: {
-    // fontFamily: 'Dosis-Regular',
+    fontFamily: 'Dosis-Regular',
   },
 });
 

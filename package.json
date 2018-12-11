@@ -8,10 +8,14 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/Dosis/"
+    ]
+  },
   "dependencies": {
     "react": "16.6.1",
-    "react-native": "0.57.7",
-    "react-native-firebase": "^5.1.1"
+    "react-native": "0.57.7"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.1.6",
