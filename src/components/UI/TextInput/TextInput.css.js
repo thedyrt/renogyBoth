@@ -13,11 +13,11 @@ export default StyleSheet.create({
     padding: standards.padding,
   },
   error: {
-    borderWidth: 2,
+    borderWidth: standards.borderWidth,
     borderColor: colors.red,
   },
   input: {
     padding: standards.padding,
-    fontSize: 20,
+    fontSize: standards.body,
   },
 });

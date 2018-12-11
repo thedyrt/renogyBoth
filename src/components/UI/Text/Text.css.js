@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   h5: {
-    fontSize: 12,
+    fontSize: 16,
   },
 
   /*
