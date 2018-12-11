@@ -7,6 +7,7 @@ const standards = {
   paddingLarge: 30,
   gutter: 40,
   offsetTop: 100,
+  borderRadius: 5,
 };
 
 export default standards;

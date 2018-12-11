@@ -8,6 +8,7 @@ const colors = {
   white: '#FFFFFF',
   grayLight: '#E7EAEF',
   grayLightest: '#F4F8FB',
+  red: '#ff4c5c',
 };
 
 export default colors;

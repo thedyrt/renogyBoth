@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
   gold: {
     color: colors.gold,
   },
- 
+  red: {
+    color: colors.red,
+  },
   /*
   * FONT SIZE
   */
