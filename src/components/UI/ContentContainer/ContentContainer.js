@@ -10,22 +10,14 @@ import {
   BackgroundImage,
 } from 'UI';
 
-import styles from './ContentContainer.css';
+import styles from './ContentContainer.css.js';
 
 type Props = {
   children: Node,
-  FooterComponent: Node,
+  FooterComponent: typeof PureComponent,
 };
 
-type State = {
-  phoneNumber?: number,
-};
-
-export class ContentContainer extends PureComponent<Props, State> {
-  static defaultProps = {
-    footerFlex: 1,
-  };
-
+export class ContentContainer extends PureComponent<Props> {
   render() {
     const {
       children,
@@ -38,7 +30,7 @@ export class ContentContainer extends PureComponent<Props, State> {
         <View style={styles.body}>
           {children}
         </View>
-        {FooterComponent && <FooterComponent />}
+        <FooterComponent />
       </View>
     );
   }

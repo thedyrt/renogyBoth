@@ -14,11 +14,16 @@ export default StyleSheet.create({
   },
   inputs: {
     flexDirection: 'row',
+    marginBottom: standards.marginSmall,
   },
   input3: {
     width: 80,
   },
   input4: {
     width: 90,
+  },
+  error: {
+    justifyContent: 'center',
+    marginBottom: standards.marginMedium,
   },
 });

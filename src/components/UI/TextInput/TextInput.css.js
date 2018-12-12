@@ -20,8 +20,4 @@ export default StyleSheet.create({
     padding: standards.padding,
     fontSize: 20,
   },
-  error: {
-    height: 25,
-    marginTop: standards.marginSmall,
-  },
 });

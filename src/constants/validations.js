@@ -10,14 +10,6 @@ export const landingValidations = {
   },
 };
 
-export const successValidations = {
-  phone: {
-    length: {
-      is: 10,
-    },
-  },
-};
-
 export const phoneNumberValidations = {
   areaCode: {
     presence: true,
@@ -34,7 +26,18 @@ export const phoneNumberValidations = {
   lineNumber: {
     presence: true,
     length: {
-      is: 3,
+      is: 4,
     },
+  },
+};
+
+
+export const successValidations = {
+  ...phoneNumberValidations,
+  phoneNumber: {
+    numericality: {
+      onlyInteger: true,
+    },
+    presence: true,
   },
 };

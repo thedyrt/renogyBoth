@@ -20,7 +20,7 @@ type Props = {
   onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,
   email?: string,
-  validations: string[],
+  validationObject: Object,
   acceptTerms: true | undefined,
   acceptEmail: true | undefined,
   forceValidations: boolean,
@@ -33,7 +33,7 @@ export default class Landing extends PureComponent<Props> {
   render() {
     const {
       email,
-      validations = {},
+      validationObject = {},
       acceptTerms,
       acceptEmail,
       forceValidations,
@@ -78,15 +78,16 @@ export default class Landing extends PureComponent<Props> {
             keyboardType="email-address"
             onChangeText={updateEmail}
             placeholder="Enter Email"
+            showValidationMessage
             vale={email}
-            validations={validations.email}
+            validations={validationObject.email}
           />
         </View>
         <Checkbox
           checked={!!acceptTerms}
           id="acceptTerms"
           toggleChecked={acceptCondition}
-          isInvalid={!!validations.acceptTerms}
+          isInvalid={!!validationObject.acceptTerms}
         >
           <View style={styles.terms}>
             <Text

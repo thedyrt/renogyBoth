@@ -8,7 +8,7 @@ import {
 import { boundMethod } from 'autobind-decorator';
 
 import {
-  Text,
+  ValidationErrorMessage,
 } from 'UI';
 
 import styles from './TextInput.css.js';
@@ -24,6 +24,7 @@ type Props = {
   onSubmitEditing: (id: string) => void,
   placeholder?: string,
   returnKeyType: 'done' | 'next',
+  showValidationMessage: boolean,
   validations?: string[],
   value: string,
 };
@@ -39,7 +40,9 @@ export class TextInput extends PureComponent<Props, State> {
     returnKeyType: 'done',
   };
 
-  state = {};
+  state = {
+    showValidations: false,
+  };
 
   @boundMethod
   onChangeText(value: string) {
@@ -79,6 +82,7 @@ export class TextInput extends PureComponent<Props, State> {
       maxLength,
       placeholder,
       returnKeyType,
+      showValidationMessage,
       validations = [],
       value,
     } = this.props;
@@ -104,16 +108,12 @@ export class TextInput extends PureComponent<Props, State> {
             value={value}
           />
         </View>
-        <View style={styles.error}>
-          {error && (
-            <Text
-              fontColor="red"
-              fontSpacing="medium"
-            >
-              {validation}
-            </Text>
-          )}
-        </View>
+        {showValidationMessage && (
+          <ValidationErrorMessage
+            validations={validations}
+            shouldShowMessage={showValidations || forceValidations}
+          />
+        )}
       </>
     );
   }

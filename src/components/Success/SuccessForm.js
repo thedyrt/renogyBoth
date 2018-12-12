@@ -15,6 +15,7 @@ import {
   Button,
   Text,
   TextInput,
+  ValidationErrorMessage,
 } from 'UI';
 
 import styles from './SuccessForm.css.js';
@@ -25,10 +26,11 @@ type Props = {
   areaCode?: string,
   prefix?: string,
   lineNumber?: string,
+  phoneNumberValidations?: string[],
 };
 
 type State = {
-  validations: Object,
+  phoneNumberPartsValidation: Object,
 };
 
 const nextInput = {
@@ -37,13 +39,17 @@ const nextInput = {
 };
 
 export default class Landing extends PureComponent<Props, State> {
-  areaCodeRef = React.createRef();
+  onSubmit: Function;
   
+  areaCodeRef = React.createRef();
+
   prefixRef = React.createRef();
   
   lineNumberRef = React.createRef();
 
-  state = { };
+  state = {
+    phoneNumberPartsValidation: validate({}, phoneNumberValidations),
+  };
 
   @boundMethod
   onChangeText(value: string, id: string) {
@@ -51,15 +57,23 @@ export default class Landing extends PureComponent<Props, State> {
       updatePhoneNumber,
     } = this.props;
 
-    const validations = validate(
-      { [id]: value },
+    const phoneNumberPartsValidation = validate(
+      {
+        ...this.props,
+        [id]: value,
+      },
       phoneNumberValidations,
-    );
-    const validation = validations[id];
+    ) || {};
 
-    if (!validation) {
-      this.focusNextInput(value, id);
-    }
+    const validation = phoneNumberPartsValidation[id];
+
+    this.setState({
+      phoneNumberPartsValidation,
+    }, () => {
+      if (!validation) {
+        this.focusNextInput(value, id);
+      }
+    });
 
     updatePhoneNumber(value, id);
   }
@@ -69,16 +83,19 @@ export default class Landing extends PureComponent<Props, State> {
     const { props } = this;
     const value = props[id];
 
-    const validations = validate(props, phoneNumberValidations);
+    this.focusNextInput(value, id);
+
+    const phoneNumberPartsValidation = validate(props, phoneNumberValidations);
 
     this.setState({
-      validations,
+      phoneNumberPartsValidation,
     }, () => {
       this.focusNextInput(value, id);
     });
   }
 
   focusNextInput(value: string, id: string) {
+    // $FlowFixMe
     const { current: nextInputEl } = this[nextInput[id]] || {};
 
     if (nextInputEl) {
@@ -89,16 +106,15 @@ export default class Landing extends PureComponent<Props, State> {
 
   render() {
     const {
-      onSubmit,
       areaCode,
-      prefix,
       lineNumber,
+      onSubmit,
+      phoneNumberValidations,
+      prefix,
     } = this.props;
     const {
-      validations = {},
+      phoneNumberPartsValidation = {},
     } = this.state;
-
-    console.log('VALID', validations);
 
     return (
       <KeyboardAvoidingView
@@ -141,14 +157,14 @@ export default class Landing extends PureComponent<Props, State> {
             <Text fontSize="h1">(&nbsp;</Text>
             <View style={styles.input3}>
               <TextInput
-                autoFocus
                 id="areaCode"
+                inputRef={this.areaCodeRef}
                 keyboardType="numeric"
                 maxLength={3}
                 onChangeText={this.onChangeText}
-                inputRef={this.areaCodeRef}
                 onSubmitEditing={this.onSubmitEditing}
                 returnKeyType="next"
+                validations={phoneNumberPartsValidation.areaCode}
                 value={areaCode}
               />
             </View>
@@ -162,6 +178,7 @@ export default class Landing extends PureComponent<Props, State> {
                 onChangeText={this.onChangeText}
                 onSubmitEditing={this.onSubmitEditing}
                 returnKeyType="next"
+                validations={phoneNumberPartsValidation.prefix}
                 value={prefix}
               />
             </View>
@@ -174,13 +191,17 @@ export default class Landing extends PureComponent<Props, State> {
                 maxLength={4}
                 onChangeText={this.onChangeText}
                 onSubmitEditing={onSubmit}
+                validations={phoneNumberPartsValidation.lineNumber}
                 value={lineNumber}
               />
             </View>
           </View>
+          <View style={styles.error}>
+            <ValidationErrorMessage validations={phoneNumberValidations} />
+          </View>
           <Button
             label="SUBMIT"
-            onPress={this.onSubmit}
+            onPress={onSubmit}
           />
         </View>
       </KeyboardAvoidingView>

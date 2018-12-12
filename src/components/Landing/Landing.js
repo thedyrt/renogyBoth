@@ -27,7 +27,7 @@ type State = {
   email?: string,
   forceValidations: boolean,
   isViewingTerms: boolean,
-  validations: string[],
+  validationObject: string[],
 };
 
 export default class Landing extends PureComponent<Props, State> {
@@ -36,7 +36,7 @@ export default class Landing extends PureComponent<Props, State> {
     acceptTerms: undefined,
     forceValidations: false,
     isViewingTerms: false,
-    validations: validate({ acceptTerms: true, email: undefined }, landingValidations),
+    validationObject: validate({ acceptTerms: true, email: undefined }, landingValidations),
   };
 
   @boundMethod
@@ -44,13 +44,13 @@ export default class Landing extends PureComponent<Props, State> {
     const { onSubmit } = this.props;
     const { state } = this;
 
-    const validations = validate(state, landingValidations);
+    const validationObject = validate(state, landingValidations);
 
-    if (isEmpty(validations)) {
+    if (isEmpty(validationObject)) {
       console.log('DO THINGS', onSubmit);
     } else {
       this.setState({
-        validations,
+        validationObject,
         forceValidations: true,
       });
     }
@@ -73,7 +73,7 @@ export default class Landing extends PureComponent<Props, State> {
 
     this.setState({
       ...newState,
-      validations: validate(newState, landingValidations),
+      validationObject: validate(newState, landingValidations),
     });
   }
 
@@ -88,7 +88,7 @@ export default class Landing extends PureComponent<Props, State> {
 
     this.setState({
       ...newState,
-      validations: validate(newState, landingValidations),
+      validationObject: validate(newState, landingValidations),
     });
   }
 

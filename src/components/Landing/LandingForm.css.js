@@ -13,7 +13,7 @@ export default StyleSheet.create({
     paddingHorizontal: standards.gutter,
   },
   input: {
-    marginBottom: standards.marginMedium,
+    marginBottom: standards.margin,
     width: '100%',
   },
   terms: {
