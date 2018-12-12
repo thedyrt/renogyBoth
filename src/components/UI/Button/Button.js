@@ -12,6 +12,7 @@ import {
 import styles from './Button.css.js';
 
 type Props = {
+  backgroundColor: 'gold' | 'transparent',
   label: string,
   onPress: () => void,
 };
@@ -19,19 +20,24 @@ type Props = {
 export class Button extends PureComponent<Props> {
   static defaultProps = {
     onPress: () => {},
+    backgroundColor: 'gold',
   };
 
   render() {
     const {
-      onPress,
+      backgroundColor,
       label,
+      onPress,
     } = this.props;
 
     return (
       <TouchableOpacity
         onPress={onPress}
         activeOpacity={0.5}
-        style={styles.container}
+        style={[
+          styles.container,
+          styles[backgroundColor],
+        ]}
       >
         <Text
           fontSize="h3"

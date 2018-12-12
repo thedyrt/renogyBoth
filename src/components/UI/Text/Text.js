@@ -10,7 +10,7 @@ import styles from './Text.css.js';
 type Props = {
   children: Node,
   fontAlignment?: 'left' | 'right' | 'center',
-  fontColor?: 'grayLightest' | 'gold' | 'red',
+  fontColor?: 'grayLightest' | 'gold' | 'red' | 'white',
   fontFamily?: 'dosis',
   fontSize?: 'h1' | 'h2' | 'h3' | 'body' | 'h5',
   fontSpacing?: 'large' | 'medium' | 'small',

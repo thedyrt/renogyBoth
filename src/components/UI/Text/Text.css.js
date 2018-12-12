@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
   red: {
     color: colors.red,
   },
+  white: {
+    color: colors.white,
+  },
   /*
   * FONT SIZE
   */

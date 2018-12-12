@@ -5,6 +5,7 @@ import { StatusBar, YellowBox } from 'react-native';
 
 import Landing from 'components/Landing/Landing.js';
 import Success from 'components/Success/Success.js';
+import TermsAndConditions from 'components/TermsAndConditions/TermsAndConditions.js';
 
 YellowBox.ignoreWarnings(['unknown call: "relay:check"']);
 
@@ -14,8 +15,9 @@ export default class App extends Component<Props> {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <Success />
+        {/* <Success /> */}
         {/* <Landing /> */}
+        <TermsAndConditions />
       </>
     );
   }
