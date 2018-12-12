@@ -23,6 +23,9 @@ export default StyleSheet.create({
     width: standards.checkboxDimension,
     marginRight: standards.margin,
   },
+  iconContainerError: {
+    borderColor: colors.red,
+  },
   check: {
     tintColor: colors.white,
     width: standards.checkboxDimension - 10,

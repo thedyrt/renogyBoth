@@ -15,6 +15,7 @@ type Props = {
   checked: boolean,
   children: Node,
   id: string,
+  isInvalid: boolean,
   toggleChecked: (id: string) => void,
 };
 
@@ -33,7 +34,7 @@ export class Checkbox extends PureComponent<Props> {
     const {
       checked,
       children,
-      toggleChecked,
+      isInvalid,
     } = this.props;
     return (
       <TouchableOpacity
@@ -41,7 +42,12 @@ export class Checkbox extends PureComponent<Props> {
         activeOpacity={1}
         style={styles.container}
       >
-        <View style={styles.iconContainer}>
+        <View
+          style={[
+            styles.iconContainer,
+            isInvalid && styles.iconContainerError,
+          ]}  
+        >
           {checked && (
             <Image
               source={{ uri: 'check' }}

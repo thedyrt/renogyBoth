@@ -19,7 +19,7 @@ type Props = {
 
 export class Text extends PureComponent<Props> {
   static defaultProps = {
-    fontAlignment: 'right',
+    fontAlignment: 'left',
     fontSize: 'body',
     fontColor: 'grayLightest',
   };

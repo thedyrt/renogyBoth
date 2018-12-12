@@ -15,13 +15,14 @@ import {
 import styles from './TextInput.css.js';
 
 type Props = {
+  forceValidations: boolean,
   id: string,
+  keyboardType: 'email-address' | 'numeric',
   onChangeText: (value: string, id: string) => void,
   onSubmitEditing: () => void,
   placeholder?: string,
   validations?: string[],
   value: string,
-  keyboardType: 'email-address' | 'numeric',
 };
 
 type State = {
@@ -63,11 +64,12 @@ export class TextInput extends PureComponent<Props, State> {
 
   @boundMethod
   onBlur() {
-    this.setState({ showValidations: true })
+    this.setState({ showValidations: true });
   }
 
   render() {
     const {
+      forceValidations,
       keyboardType,
       placeholder,
       validations = [],
@@ -75,11 +77,11 @@ export class TextInput extends PureComponent<Props, State> {
     } = this.props;
     const { showValidations } = this.state;
     const validation = validations[0];
-    const error = showValidations && validations;
+    const error = (showValidations || forceValidations) && validations;
 
     return (
       <>
-        <View style={[styles.container, error && styles.error]}>
+        <View style={[styles.container, error && styles.errorContainer]}>
           <NativeTextInput
             keyboardType={keyboardType}
             onBlur={this.onBlur}
@@ -92,14 +94,16 @@ export class TextInput extends PureComponent<Props, State> {
             enablesReturnKeyAutomatically={false}
           />
         </View>
-        {error && (
-          <Text
-            fontColor="red"
-            fontSpacing="medium"
-          >
-            {validation}
-          </Text>
-        )}
+        <View style={styles.error}>
+          {error && (
+            <Text
+              fontColor="red"
+              fontSpacing="medium"
+            >
+              {validation}
+            </Text>
+          )}
+        </View>
       </>
     );
   }

@@ -10,7 +10,7 @@ const standards = {
   marginMedium: 20,
   marginLarge: 30,
   gutter: 40,
-  offsetTop: 100,
+  offsetTop: 70,
   borderRadius: 5,
   borderWidth: 2,
   checkboxDimension: 30,

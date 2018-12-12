@@ -4,16 +4,14 @@ import React, { PureComponent } from 'react';
 import {
   View,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
-import { boundMethod } from 'autobind-decorator';
-import validate from 'validate.js';
-
-import { emailValidations } from 'constants/validations';
 
 import {
+  Button,
+  Checkbox,
   Text,
   TextInput,
-  Checkbox,
 } from 'UI';
 
 import styles from './LandingForm.css.js';
@@ -21,52 +19,35 @@ import styles from './LandingForm.css.js';
 type Props = {
   onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,
-};
-
-type State = {
   email?: string,
-  validations?: string[],
-  acceptTerms: boolean,
-  acceptEmail: boolean,
+  validations: string[],
+  acceptTerms: true | undefined,
+  acceptEmail: true | undefined,
+  forceValidations: boolean,
+  updateEmail: (email: string) => void,
+  acceptCondition: (id: string) => void,
+  onSubmit: () => void,
 };
 
-export default class Landing extends PureComponent<Props, State> {
-  state = {
-    acceptTerms: false,
-    acceptEmail: true,
-    email: '',
-  };
-
-  @boundMethod
-  updateEmail(email: string) {
-    const { email: validations } = validate({ email }, emailValidations) || {};
-
-    this.setState({
-      email,
-      validations,
-    });
-  }
-
-  @boundMethod
-  acceptCondition(id: 'acceptTerms' | 'acceptEmail') {
-    this.setState((prevState: State) => ({
-      [id]: !prevState[id],
-    }));
-  }
-
+export default class Landing extends PureComponent<Props> {
   render() {
     const {
       email,
-      validations,
+      validations = {},
       acceptTerms,
       acceptEmail,
-    } = this.state;
-    const {
+      forceValidations,
       toggleViewTerms,
+      onSubmit,
+      updateEmail,
+      acceptCondition,
     } = this.props;
 
     return (
-      <View style={styles.form}>
+      <KeyboardAvoidingView
+        style={styles.form}
+        behavior="padding"
+      >
         <Text
           fontFamily="dosis"
           fontSize="h2"
@@ -93,17 +74,19 @@ export default class Landing extends PureComponent<Props, State> {
         </Text>
         <View style={styles.input}>
           <TextInput
-            onChangeText={this.updateEmail}
+            forceValidations={forceValidations}
+            keyboardType="email-address"
+            onChangeText={updateEmail}
             placeholder="Enter Email"
             vale={email}
-            validations={validations}
-            keyboardType="email-address"
+            validations={validations.email}
           />
         </View>
         <Checkbox
-          checked={acceptTerms}
+          checked={!!acceptTerms}
           id="acceptTerms"
-          toggleChecked={this.acceptCondition}
+          toggleChecked={acceptCondition}
+          isInvalid={!!validations.acceptTerms}
         >
           <View style={styles.terms}>
             <Text
@@ -125,9 +108,9 @@ export default class Landing extends PureComponent<Props, State> {
           </View>
         </Checkbox>
         <Checkbox
-          checked={acceptEmail}
+          checked={!!acceptEmail}
           id="acceptEmail"
-          toggleChecked={this.acceptCondition}
+          toggleChecked={acceptCondition}
         >
           <Text
             fontSize="h5"
@@ -136,7 +119,13 @@ export default class Landing extends PureComponent<Props, State> {
             I agree to recieve info via email about future giveaways and promotions from Renogy and The Dyrt.
           </Text>
         </Checkbox>
-      </View>
+        <View style={styles.footer}>
+          <Button
+            onPress={onSubmit}
+            label="ENTER"
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }

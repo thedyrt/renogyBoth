@@ -12,12 +12,16 @@ export default StyleSheet.create({
     width: '100%',
     padding: standards.padding,
   },
-  error: {
+  errorContainer: {
     borderWidth: standards.borderWidth,
     borderColor: colors.red,
   },
   input: {
     padding: standards.padding,
-    fontSize: standards.body,
+    fontSize: 20,
+  },
+  error: {
+    height: 25,
+    marginTop: standards.marginSmall,
   },
 });

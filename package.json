@@ -16,6 +16,7 @@
   "dependencies": {
     "add": "^2.0.6",
     "autobind-decorator": "^2.4.0",
+    "lodash": "^4.17.11",
     "react": "16.6.1",
     "react-native": "0.57.7",
     "validate.js": "^0.12.0",

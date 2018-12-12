@@ -19,4 +19,9 @@ export default StyleSheet.create({
   terms: {
     flexDirection: 'row',
   },
+  footer: {
+    alignItems: 'center',
+    marginTop: standards.marginLarge,
+    marginBottom: standards.offsetTop,
+  },
 });
