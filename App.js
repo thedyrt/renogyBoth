@@ -2,6 +2,11 @@
 
 import React, { Component } from 'react';
 import { StatusBar, YellowBox } from 'react-native';
+import { boundMethod } from 'autobind-decorator';
+
+import {
+  SlideIn,
+} from 'UI';
 
 import Landing from 'components/Landing/Landing.js';
 import Success from 'components/Success/Success.js';
@@ -9,14 +14,58 @@ import Success from 'components/Success/Success.js';
 YellowBox.ignoreWarnings(['unknown call: "relay:check"']);
 
 type Props = {};
-export default class App extends Component<Props> {
+type State = {
+  isViewingSuccess: boolean,
+  hideLanding: boolean,
+};
+
+export default class App extends Component<Props, State> {
+  state = {
+    isViewingSuccess: false,
+    hideLanding: false,
+  };
+
+  @boundMethod
+  addUserEmail() {
+    this.setState({
+      isViewingSuccess: true,
+    });
+  }
+
+  @boundMethod
+  reset() {
+    this.setState({
+      isViewingSuccess: false,
+    });
+  }
+
+  @boundMethod
+  addUserPhone() {
+    this.setState({
+      isViewingSuccess: false,
+    });
+  }
+
   render() {
+    const {
+      isViewingSuccess,
+      hideLanding,
+    } = this.state;
+
     return (
       <>
         <StatusBar barStyle="light-content" />
-        {/* <Success /> */}
-        <Landing />
-        {/* <TermsAndConditions /> */}
+        {!hideLanding && (
+          <Landing
+            onSubmit={this.addUserEmail}
+          />
+        )}
+        <SlideIn isVisible={isViewingSuccess}>
+          <Success
+            onSubmit={this.addUserPhone}
+            onInactive={this.reset}
+          />
+        </SlideIn>
       </>
     );
   }

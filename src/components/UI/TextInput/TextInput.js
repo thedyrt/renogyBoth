@@ -24,6 +24,7 @@ type Props = {
   onSubmitEditing: (id: string) => void,
   placeholder?: string,
   returnKeyType: 'done' | 'next',
+  shouldResetState: boolean,
   showValidationMessage: boolean,
   validations?: string[],
   value: string,
@@ -43,6 +44,12 @@ export class TextInput extends PureComponent<Props, State> {
   state = {
     showValidations: false,
   };
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.shouldResetState && !prevProps.shouldResetState) {
+      this.setState({});
+    }
+  }
 
   @boundMethod
   onChangeText(value: string) {
@@ -86,6 +93,7 @@ export class TextInput extends PureComponent<Props, State> {
       validations = [],
       value,
     } = this.props;
+
     const { showValidations } = this.state;
     const validation = validations[0];
     const error = (showValidations || forceValidations) && validation;

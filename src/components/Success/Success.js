@@ -1,12 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import {
-  View,
-} from 'react-native';
 import validate from 'validate.js';
 import { boundMethod } from 'autobind-decorator';
-import { isEmpty } from 'lodash';
 
 import { successValidations } from 'constants/validations';
 
@@ -18,7 +14,8 @@ import SuccessFooter from './SuccessFooter.js';
 import SuccessForm from './SuccessForm.js';
 
 type Props = {
-  onSubmit: (state: Object) => void,
+  onSubmit: (phoneNumber: number) => void,
+  onInactive: () => void,
 };
 
 type State = {
@@ -28,8 +25,29 @@ type State = {
   phoneNumberValidations?: string[],
 };
 
+const INACTVE_THRESHOLD = 5000;
+
 export default class Landing extends PureComponent<Props, State> {
+  inactiveTimeout: any;
+
   state = {};
+
+  componentDidMount() {
+    this.startClock();
+  }
+
+  componentWillUnmount() {
+    this.stopClock();
+  }
+
+  startClock() {
+    const { onInactive } = this.props;
+    this.inactiveTimeout = setTimeout(onInactive, INACTVE_THRESHOLD);
+  }
+
+  stopClock() {
+    clearTimeout(this.inactiveTimeout);
+  }
 
   @boundMethod
   onSubmit() {
@@ -38,13 +56,16 @@ export default class Landing extends PureComponent<Props, State> {
       prefix,
       lineNumber,
     } = this.state;
- 
+    
+    this.stopClock();
+
+    const phoneNumber = +`${areaCode || ''}${prefix || ''}${lineNumber || ''}`;
     const phoneNumberValidation = validate(
       {
         areaCode,
         prefix,
         lineNumber,
-        phoneNumber: +`${areaCode || ''}${prefix || ''}${lineNumber || ''}`,
+        phoneNumber,
       },
       successValidations,
     );
@@ -52,22 +73,32 @@ export default class Landing extends PureComponent<Props, State> {
     if (phoneNumberValidation) {
       this.setState({
         phoneNumberValidations: ['Phone number is invalid, please try again'],
+      }, () => {
+        this.startClock();
       });
     } else {
-      console.log('TODO');
+      const {
+        onSubmit,
+      } = this.props;
+
+      this.setState({}, () => {
+        onSubmit(phoneNumber);
+      });
     }
   }
 
   @boundMethod
   updatePhoneNumber(number: string, id: string) {
+    this.stopClock();
     this.setState({
       [id]: number,
       phoneNumberValidations: undefined,
+    }, () => {
+      this.stopClock();
     });
   }
 
   render() {
-    console.log(this.state);
     return (
       <ContentContainer FooterComponent={SuccessFooter}>
         <SuccessForm
@@ -76,6 +107,6 @@ export default class Landing extends PureComponent<Props, State> {
           {...this.state}
         />
       </ContentContainer>
-    );
+      );
   }
 }

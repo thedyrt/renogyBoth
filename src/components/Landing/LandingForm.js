@@ -17,30 +17,32 @@ import {
 import styles from './LandingForm.css.js';
 
 type Props = {
+  acceptCondition: (id: 'acceptTerms' | 'acceptEmail') => void,
+  acceptEmail: true | void,
+  acceptTerms: true | void,
+  email?: string,
+  forceValidations: boolean,
+  formSubmitted: boolean,
+  onSubmit: () => void,
   onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,
-  email?: string,
-  validationObject: Object,
-  acceptTerms: true | void,
-  acceptEmail: true | void,
-  forceValidations: boolean,
   updateEmail: (email: string) => void,
-  acceptCondition: (id: 'acceptTerms' | 'acceptEmail') => void,
-  onSubmit: () => void,
+  validationObject: Object,
 };
 
 export default class Landing extends PureComponent<Props> {
   render() {
     const {
-      email,
-      validationObject = {},
-      acceptTerms,
-      acceptEmail,
-      forceValidations,
-      toggleViewTerms,
-      onSubmit,
-      updateEmail,
       acceptCondition,
+      acceptEmail,
+      acceptTerms,
+      email,
+      forceValidations,
+      formSubmitted,
+      onSubmit,
+      toggleViewTerms,
+      updateEmail,
+      validationObject = {},
     } = this.props;
 
     return (
@@ -74,20 +76,23 @@ export default class Landing extends PureComponent<Props> {
         </Text>
         <View style={styles.input}>
           <TextInput
+            shouldResetState={formSubmitted}
             forceValidations={forceValidations}
             keyboardType="email-address"
             onChangeText={updateEmail}
             placeholder="Enter Email"
             showValidationMessage
-            vale={email}
+            value={email}
             validations={validationObject.email}
           />
         </View>
         <Checkbox
+          shouldResetState={formSubmitted}
           checked={!!acceptTerms}
           id="acceptTerms"
           toggleChecked={acceptCondition}
           isInvalid={!!validationObject.acceptTerms}
+          forceValidations={forceValidations}
         >
           <View style={styles.terms}>
             <Text

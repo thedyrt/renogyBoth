@@ -18,26 +18,31 @@ import LandingForm from './LandingForm.js';
 import LandingFooter from './LandingFooter.js';
 
 type Props = {
-  onSubmit: (state: Object) => void,
+  onSubmit: ({ email: string, emailOptIn: boolean }) => void,
 };
 
 type State = {
-  acceptEmail: true | undefined,
-  acceptTerms: true | undefined,
+  acceptEmail: true | void,
+  acceptTerms: true | void,
   email?: string,
   forceValidations: boolean,
   isViewingTerms: boolean,
   validationObject: string[],
+  formSubmitted: boolean,
 };
 
+const cleanState = ({
+  acceptEmail: true,
+  acceptTerms: undefined,
+  forceValidations: false,
+  isViewingTerms: false,
+  validationObject: validate({ acceptTerms: true, email: undefined }, landingValidations),
+  email: '',
+  formSubmitted: false,
+}: Object);
+
 export default class Landing extends PureComponent<Props, State> {
-  state = {
-    acceptEmail: true,
-    acceptTerms: undefined,
-    forceValidations: false,
-    isViewingTerms: false,
-    validationObject: validate({ acceptTerms: true, email: undefined }, landingValidations),
-  };
+  state = cleanState;
 
   @boundMethod
   onSubmit() {
@@ -47,7 +52,20 @@ export default class Landing extends PureComponent<Props, State> {
     const validationObject = validate(state, landingValidations);
 
     if (isEmpty(validationObject)) {
-      console.log('DO THINGS', onSubmit);
+      this.setState({
+        ...cleanState,
+        formSubmitted: true,
+      }, () => {
+        // $FlowFixMe validations
+        onSubmit({
+          email: state.email,
+          emailOptIn: state.acceptEmail,
+        });
+
+        this.setState({
+          formSubmitted: false,
+        });
+      });
     } else {
       this.setState({
         validationObject,
