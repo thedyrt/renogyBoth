@@ -6,6 +6,10 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from 'react-native';
+import validate from 'validate.js';
+import { boundMethod } from 'autobind-decorator';
+
+import { phoneNumberValidations } from 'constants/validations';
 
 import {
   Button,
@@ -16,10 +20,86 @@ import {
 import styles from './SuccessForm.css.js';
 
 type Props = {
+  onSubmit: () => void,
+  updatePhoneNumber: (value: string, id: string) => void,
+  areaCode?: string,
+  prefix?: string,
+  lineNumber?: string,
 };
 
-export default class Landing extends PureComponent<Props> {
+type State = {
+  validations: Object,
+};
+
+const nextInput = {
+  areaCode: 'prefixRef',
+  prefix: 'lineNumberRef',
+};
+
+export default class Landing extends PureComponent<Props, State> {
+  areaCodeRef = React.createRef();
+  
+  prefixRef = React.createRef();
+  
+  lineNumberRef = React.createRef();
+
+  state = { };
+
+  @boundMethod
+  onChangeText(value: string, id: string) {
+    const {
+      updatePhoneNumber,
+    } = this.props;
+
+    const validations = validate(
+      { [id]: value },
+      phoneNumberValidations,
+    );
+    const validation = validations[id];
+
+    if (!validation) {
+      this.focusNextInput(value, id);
+    }
+
+    updatePhoneNumber(value, id);
+  }
+
+  @boundMethod
+  onSubmitEditing(id: string) {
+    const { props } = this;
+    const value = props[id];
+
+    const validations = validate(props, phoneNumberValidations);
+
+    this.setState({
+      validations,
+    }, () => {
+      this.focusNextInput(value, id);
+    });
+  }
+
+  focusNextInput(value: string, id: string) {
+    const { current: nextInputEl } = this[nextInput[id]] || {};
+
+    if (nextInputEl) {
+      nextInputEl.focus();
+    }
+  }
+
+
   render() {
+    const {
+      onSubmit,
+      areaCode,
+      prefix,
+      lineNumber,
+    } = this.props;
+    const {
+      validations = {},
+    } = this.state;
+
+    console.log('VALID', validations);
+
     return (
       <KeyboardAvoidingView
         behavior="padding"
@@ -59,41 +139,49 @@ export default class Landing extends PureComponent<Props> {
           </Text>
           <View style={styles.inputs}>
             <Text fontSize="h1">(&nbsp;</Text>
-            <View style={[styles.input, styles.input3]}>
+            <View style={styles.input3}>
               <TextInput
-                maxLength={3}
+                autoFocus
+                id="areaCode"
                 keyboardType="numeric"
+                maxLength={3}
+                onChangeText={this.onChangeText}
+                inputRef={this.areaCodeRef}
+                onSubmitEditing={this.onSubmitEditing}
+                returnKeyType="next"
+                value={areaCode}
               />
             </View>
             <Text fontSize="h1">&nbsp;)&nbsp;</Text>
-            <View style={[styles.input, styles.input3]}>
+            <View style={styles.input3}>
               <TextInput
-                maxLength={3}
+                id="prefix"
+                inputRef={this.prefixRef}
                 keyboardType="numeric"
+                maxLength={3}
+                onChangeText={this.onChangeText}
+                onSubmitEditing={this.onSubmitEditing}
+                returnKeyType="next"
+                value={prefix}
               />
             </View>
             <Text fontSize="h1">&nbsp;-&nbsp;</Text>
-            <View style={[styles.input, styles.input4]}>
+            <View style={styles.input4}>
               <TextInput
+                id="lineNumber"
+                inputRef={this.lineNumberRef}
+                keyboardType="phone-pad"
                 maxLength={4}
-                keyboardType="numeric"
+                onChangeText={this.onChangeText}
+                onSubmitEditing={onSubmit}
+                value={lineNumber}
               />
             </View>
-
           </View>
-         
-          
-          {/* <View style={styles.inputs}>
-            <View>
-              <TextInput />
-            </View>
-            <View>
-              <TextInput />
-            </View>
-            <View>
-              <TextInput />
-            </View>
-          </View> */}
+          <Button
+            label="SUBMIT"
+            onPress={this.onSubmit}
+          />
         </View>
       </KeyboardAvoidingView>
     );

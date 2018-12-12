@@ -22,42 +22,31 @@ type Props = {
 };
 
 type State = {
-  phoneNumber?: number,
+  areaCode?: string,
+  prefix?: string,
+  lineNumber?: string,
 };
 
 export default class Landing extends PureComponent<Props, State> {
-  renderFooter() {
-    return (
-      <View
-        style={{ 
-          // backgroundColor: 'yellow',
-          width: standards.windowWidth,
-          height: standards.windowHeight / 2,
-          paddinHorizontal: standards.paddingLarge,
-          paddingBottom: standards.offsetTop
-        }}
-      >
-        <Image
-          source={{ uri: footerUri}}
-          style={{
-            width: undefined,
-            height: undefined,
-            flex: 1,
-          }}
+  @boundMethod
+  onSubmit() {
+    console.log('TODO');
+  }
 
-        />
-        {/* <BackgroundImage uri={footerUri} /> */}
-      </View>
-    );
+  @boundMethod
+  updatePhoneNumber(number: string, id: string) {
+    this.setState({
+      [id]: number,
+    });
   }
 
   render() {
     return (
-      <ContentContainer
-        FooterComponent={SuccessFooter}
-      >
+      <ContentContainer FooterComponent={SuccessFooter}>
         <SuccessForm
-      
+          updatePhoneNumber={this.updatePhoneNumber}
+          onSubmit={this.onSubmit}
+          {...this.state}
         />
       </ContentContainer>
     );

@@ -9,31 +9,16 @@ export default StyleSheet.create({
   form: {
     backgroundColor: colors.primaryMuted,
     alignItems: 'center',
-    paddingTop: standards.paddingLarge,
-    paddingHorizontal: standards.gutter,
+    paddingHorizontal: standards.paddingLarge,
+    paddingVertical: standards.paddingLarge,
   },
   inputs: {
     flexDirection: 'row',
   },
-  input: {
-    // marginRight: standards.margin,
-  },
   input3: {
-    width: 72,
+    width: 80,
   },
   input4: {
-    width: 81,
+    width: 90,
   },
-  // input: {
-  //   marginBottom: standards.marginMedium,
-  //   width: '100%',
-  // },
-  // terms: {
-  //   flexDirection: 'row',
-  // },
-  // footer: {
-  //   alignItems: 'center',
-  //   marginTop: standards.marginLarge,
-  //   marginBottom: standards.offsetTop,
-  // },
 });

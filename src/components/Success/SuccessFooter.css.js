@@ -7,9 +7,10 @@ import standards from 'constants/standards';
 export default StyleSheet.create({
   container: {
     width: standards.windowWidth,
-    height: standards.windowHeight / 2,
+    height: standards.windowHeight / 2.3,
     paddingHorizontal: standards.paddingLarge,
-    paddingBottom: standards.offsetTop,
+    paddingBottom: standards.paddingLarge,
+    justifyContent: 'center',
   },
   image: {
     width: undefined,
