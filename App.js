@@ -14,8 +14,8 @@ export default class App extends Component<Props> {
     return (
       <>
         <StatusBar barStyle="light-content" />
-        {/* <Success /> */}
-        <Landing />
+        <Success />
+        {/* <Landing /> */}
       </>
     );
   }

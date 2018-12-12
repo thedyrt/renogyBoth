@@ -18,6 +18,7 @@ type Props = {
   forceValidations: boolean,
   id: string,
   keyboardType: 'email-address' | 'numeric',
+  maxLength?: number,
   onChangeText: (value: string, id: string) => void,
   onSubmitEditing: () => void,
   placeholder?: string,
@@ -71,6 +72,7 @@ export class TextInput extends PureComponent<Props, State> {
     const {
       forceValidations,
       keyboardType,
+      maxLength,
       placeholder,
       validations = [],
       value,
@@ -83,7 +85,9 @@ export class TextInput extends PureComponent<Props, State> {
       <>
         <View style={[styles.container, error && styles.errorContainer]}>
           <NativeTextInput
+            enablesReturnKeyAutomatically={false}
             keyboardType={keyboardType}
+            maxLength={maxLength}
             onBlur={this.onBlur}
             onChangeText={this.onChangeText}
             onSubmitEditing={this.onSubmitEditing}
@@ -91,7 +95,6 @@ export class TextInput extends PureComponent<Props, State> {
             returnKeyType="done"
             style={styles.input}
             value={value}
-            enablesReturnKeyAutomatically={false}
           />
         </View>
         <View style={styles.error}>

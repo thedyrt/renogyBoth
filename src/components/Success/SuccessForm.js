@@ -57,7 +57,43 @@ export default class Landing extends PureComponent<Props> {
           >
             (available for both iOS and Android)
           </Text>
+          <View style={styles.inputs}>
+            <Text fontSize="h1">(&nbsp;</Text>
+            <View style={[styles.input, styles.input3]}>
+              <TextInput
+                maxLength={3}
+                keyboardType="numeric"
+              />
+            </View>
+            <Text fontSize="h1">&nbsp;)&nbsp;</Text>
+            <View style={[styles.input, styles.input3]}>
+              <TextInput
+                maxLength={3}
+                keyboardType="numeric"
+              />
+            </View>
+            <Text fontSize="h1">&nbsp;-&nbsp;</Text>
+            <View style={[styles.input, styles.input4]}>
+              <TextInput
+                maxLength={4}
+                keyboardType="numeric"
+              />
+            </View>
 
+          </View>
+         
+          
+          {/* <View style={styles.inputs}>
+            <View>
+              <TextInput />
+            </View>
+            <View>
+              <TextInput />
+            </View>
+            <View>
+              <TextInput />
+            </View>
+          </View> */}
         </View>
       </KeyboardAvoidingView>
     );

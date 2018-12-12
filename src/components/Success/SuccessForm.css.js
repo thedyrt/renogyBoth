@@ -12,6 +12,18 @@ export default StyleSheet.create({
     paddingTop: standards.paddingLarge,
     paddingHorizontal: standards.gutter,
   },
+  inputs: {
+    flexDirection: 'row',
+  },
+  input: {
+    // marginRight: standards.margin,
+  },
+  input3: {
+    width: 72,
+  },
+  input4: {
+    width: 81,
+  },
   // input: {
   //   marginBottom: standards.marginMedium,
   //   width: '100%',
