@@ -17,6 +17,7 @@ export class BackgroundImage extends PureComponent<Props> {
       <Image
         source={{ uri }}
         style={styles.background}
+        resizeMode="cover"
       />
     );
   }

@@ -11,11 +11,11 @@ import { isEmpty } from 'lodash';
 import { landingValidations } from 'constants/validations';
 
 import {
-  BackgroundImage,
+  ContentContainer,
 } from 'UI';
 
 import LandingForm from './LandingForm.js';
-import styles from './Landing.css.js';
+import LandingFooter from './LandingFooter.js';
 
 type Props = {
   onSubmit: (state: Object) => void,
@@ -94,23 +94,17 @@ export default class Landing extends PureComponent<Props, State> {
 
   render() {
     return (
-      <View style={styles.appContainer}>
-        <BackgroundImage uri="background" />
-        <View style={styles.content}>
-          <View style={styles.body}>
-            <LandingForm
-              toggleViewTerms={this.toggleViewTerms}
-              onSubmit={this.onSubmit}
-              updateEmail={this.updateEmail}
-              acceptCondition={this.acceptCondition}
-              {...this.state}
-            />
-          </View>
-          <View style={styles.footer}>
-            <BackgroundImage uri="footer" />
-          </View>
-        </View>
-      </View>
+      <ContentContainer
+        FooterComponent={LandingFooter}
+      >
+        <LandingForm
+          toggleViewTerms={this.toggleViewTerms}
+          onSubmit={this.onSubmit}
+          updateEmail={this.updateEmail}
+          acceptCondition={this.acceptCondition}
+          {...this.state}
+        />
+      </ContentContainer>
     );
   }
 }
