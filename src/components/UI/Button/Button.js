@@ -41,6 +41,7 @@ export class Button extends PureComponent<Props> {
       >
         <Text
           fontSize="h3"
+          fontColor="white"
         >
           {label}
         </Text>

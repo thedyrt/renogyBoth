@@ -13,21 +13,28 @@ import styles from './TermsAndConditions.css.js';
 import Condition from './Condition.js';
 
 type Props = {
-  acceptTerms: () => void,
+  accept: () => void,
   cancel: () => void,
 };
 
 export default class TermsAndConditions extends PureComponent<Props> {
   render() {
+    const {
+      cancel,
+      accept,
+    } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.actions}>
           <Button
             label="Accept Terms"
+            onPress={accept}
           />
           <Button
             backgroundColor="transparent"
             label="Cancel"
+            onPress={cancel}
           />
         </View>
         <ScrollView

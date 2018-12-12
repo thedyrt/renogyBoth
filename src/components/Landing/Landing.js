@@ -1,17 +1,17 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import {
-  View,
-} from 'react-native';
 import validate from 'validate.js';
 import { boundMethod } from 'autobind-decorator';
 import { isEmpty } from 'lodash';
 
 import { landingValidations } from 'constants/validations';
 
+import TermsAndConditions from 'components/TermsAndConditions/TermsAndConditions.js';
+
 import {
   ContentContainer,
+  SlideIn,
 } from 'UI';
 
 import LandingForm from './LandingForm.js';
@@ -58,7 +58,6 @@ export default class Landing extends PureComponent<Props, State> {
 
   @boundMethod
   toggleViewTerms() {
-    console.log('TODO IMPLEMENT THIS');
     this.setState((prevState: State) => ({
       isViewingTerms: !prevState.isViewingTerms,
     }));
@@ -92,19 +91,39 @@ export default class Landing extends PureComponent<Props, State> {
     });
   }
 
+  @boundMethod
+  acceptTerms() {
+    this.setState({
+      acceptTerms: true,
+      isViewingTerms: false,
+    });
+  }
+
   render() {
+    const {
+      isViewingTerms,
+    } = this.state;
+
     return (
-      <ContentContainer
-        FooterComponent={LandingFooter}
-      >
-        <LandingForm
-          toggleViewTerms={this.toggleViewTerms}
-          onSubmit={this.onSubmit}
-          updateEmail={this.updateEmail}
-          acceptCondition={this.acceptCondition}
-          {...this.state}
-        />
-      </ContentContainer>
+      <>
+        <ContentContainer
+          FooterComponent={LandingFooter}
+        >
+          <LandingForm
+            toggleViewTerms={this.toggleViewTerms}
+            onSubmit={this.onSubmit}
+            updateEmail={this.updateEmail}
+            acceptCondition={this.acceptCondition}
+            {...this.state}
+          />
+        </ContentContainer>
+        <SlideIn isVisible={isViewingTerms}>
+          <TermsAndConditions
+            cancel={this.toggleViewTerms}
+            accept={this.acceptTerms}
+          />
+        </SlideIn>
+      </>
     );
   }
 }

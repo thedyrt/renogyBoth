@@ -21,11 +21,11 @@ type Props = {
   toggleViewTerms: () => void,
   email?: string,
   validationObject: Object,
-  acceptTerms: true | undefined,
-  acceptEmail: true | undefined,
+  acceptTerms: true | void,
+  acceptEmail: true | void,
   forceValidations: boolean,
   updateEmail: (email: string) => void,
-  acceptCondition: (id: string) => void,
+  acceptCondition: (id: 'acceptTerms' | 'acceptEmail') => void,
   onSubmit: () => void,
 };
 
