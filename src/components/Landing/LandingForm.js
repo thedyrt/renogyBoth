@@ -79,6 +79,7 @@ export default class Landing extends PureComponent<Props> {
             keyboardType="email-address"
             onBlur={onInputBlur}
             onChangeText={updateEmail}
+            onSubmitEditing={onSubmit}
             placeholder="Enter Email"
             showValidationMessage
             showValidations={visibleValidations.email}

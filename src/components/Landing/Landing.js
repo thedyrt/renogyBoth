@@ -49,6 +49,7 @@ export default class Landing extends PureComponent<Props, State> {
 
     const validationObject = validate(state, landingValidations);
 
+    debugger;
     if (isEmpty(validationObject)) {
       this.setState({
         ...cleanState,
