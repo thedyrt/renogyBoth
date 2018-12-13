@@ -15,6 +15,6 @@ export default StyleSheet.create({
   body: {
     flex: 4,
     marginHorizontal: standards.gutter,
-    marginTop: standards.offsetTop,
+    marginTop: standards.offset,
   },
 });

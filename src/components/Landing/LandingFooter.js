@@ -13,6 +13,7 @@ export default class LandingFooter extends PureComponent<Props, State> {
       <Image
         source={{ uri: 'footer'}}
         style={styles.image}
+        resizeMode="contain"
       />
     );
   }

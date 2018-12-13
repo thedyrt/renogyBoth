@@ -11,7 +11,7 @@ type Props = {
   children: Node,
   fontAlignment?: 'left' | 'right' | 'center',
   fontColor?: 'grayLightest' | 'gold' | 'red' | 'white',
-  fontFamily?: 'dosis',
+  fontFamily?: 'dosis' | 'openSans',
   fontSize?: 'h1' | 'h2' | 'h3' | 'body' | 'h5',
   fontSpacing?: 'large' | 'medium' | 'small',
   fontWeight?: 'semiBold',
@@ -22,6 +22,7 @@ export class Text extends PureComponent<Props> {
     fontAlignment: 'left',
     fontSize: 'body',
     fontColor: 'grayLightest',
+    fontFamily: 'openSans',
   };
 
   getStyles() {

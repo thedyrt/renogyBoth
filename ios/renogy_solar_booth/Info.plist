@@ -63,6 +63,13 @@
 		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-SemiBold.ttf</string>
 		<string>OpenSans-SemiBoldItalic.ttf</string>
+		<string>Dosis-Bold.ttf</string>
+		<string>Dosis-ExtraBold.ttf</string>
+		<string>Dosis-ExtraLight.ttf</string>
+		<string>Dosis-Light.ttf</string>
+		<string>Dosis-Medium.ttf</string>
+		<string>Dosis-Regular.ttf</string>
+		<string>Dosis-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

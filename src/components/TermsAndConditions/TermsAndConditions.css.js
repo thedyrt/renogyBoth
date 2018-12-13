@@ -18,7 +18,7 @@ export default StyleSheet.create({
     backgroundColor: colors.primaryMuted,
   },
   scrollContainer: {
-    paddingBottom: standards.offsetTop,
+    paddingBottom: standards.offset,
   },
   actions: {
     flexDirection: 'row',

@@ -17,6 +17,7 @@ export default class Landing extends PureComponent<Props, State> {
         <Image
           source={{ uri: 'map'}}
           style={styles.image}
+          resizeMode="contain"
         />
       </View>
     );

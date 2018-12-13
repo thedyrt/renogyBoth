@@ -120,36 +120,32 @@ export default class Landing extends PureComponent<Props, State> {
       <KeyboardAvoidingView
         behavior="padding"
       >
-        <Text
-          fontFamily="dosis"
-          fontSize="h1"
-          fontSpacing="large"
-          fontWeight="semiBold"
-          fontAlignment="center"
-        >
-          THANKS FOR ENTERING!
-        </Text>
         <View style={styles.form}>
+          <Text
+            fontFamily="dosis"
+            fontSize="h1"
+            fontSpacing="large"
+            fontWeight="semiBold"
+            fontAlignment="center"
+          >
+            THANKS FOR ENTERING!
+          </Text>
           <Text
             fontFamily="dosis"
             fontSize="h2"
             fontSpacing="large"
             fontWeight="semiBold"
           >
-            Take The Dyrt With you!
+            Take The Dyrt with you!
           </Text>
           <Text
-            fontFamily="dosis"
             fontSize="h3"
-            fontWeight="semiBold"
           >
             Enter your phone number to download our free app.
           </Text>
           <Text
-            fontFamily="dosis"
             fontSize="h5"
             fontSpacing="large"
-            fontWeight="semiBold"
           >
             (available for both iOS and Android)
           </Text>

@@ -9,7 +9,7 @@ export default StyleSheet.create({
   form: {
     backgroundColor: colors.primaryMuted,
     alignItems: 'center',
-    paddingTop: standards.offsetTop,
+    paddingTop: standards.offset,
     paddingHorizontal: standards.gutter,
   },
   input: {
@@ -22,6 +22,6 @@ export default StyleSheet.create({
   footer: {
     alignItems: 'center',
     marginTop: standards.marginLarge,
-    marginBottom: standards.offsetTop,
+    marginBottom: standards.offset,
   },
 });

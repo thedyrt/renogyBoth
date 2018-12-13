@@ -2,8 +2,11 @@
 
 import { StyleSheet } from 'react-native';
 
+import standards from 'constants/standards';
+
 export default StyleSheet.create({
   image: {
-    flex: 1,
+    height: 220,
+    width: standards.windowWidth,
   },
 });

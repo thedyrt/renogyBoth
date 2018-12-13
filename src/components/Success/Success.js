@@ -107,6 +107,6 @@ export default class Landing extends PureComponent<Props, State> {
           {...this.state}
         />
       </ContentContainer>
-      );
+    );
   }
 }

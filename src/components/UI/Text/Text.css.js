@@ -78,6 +78,9 @@ const styles = StyleSheet.create({
   * FONT TYPE
   */
   dosis: {
+    fontFamily: 'Dosis-Regular',
+  },
+  openSans: {
     fontFamily: 'OpenSans-Regular',
   },
 });
