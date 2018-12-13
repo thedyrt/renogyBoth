@@ -45,6 +45,8 @@ export class Checkbox extends PureComponent<Props> {
       validations,
     } = this.props;
 
+    console.log(this.props.id, checked);
+
     const validation = validations[0];
 
     return (

@@ -34,7 +34,7 @@ const cleanState = ({
   acceptEmail: true,
   acceptTerms: undefined,
   isViewingTerms: false,
-  validationObject: validate({ acceptTerms: true, email: undefined }, landingValidations),
+  validationObject: {},
   visibleValidations: {},
   email: '',
 }: Object);
@@ -49,7 +49,6 @@ export default class Landing extends PureComponent<Props, State> {
 
     const validationObject = validate(state, landingValidations);
 
-    debugger;
     if (isEmpty(validationObject)) {
       this.setState({
         ...cleanState,
@@ -57,7 +56,7 @@ export default class Landing extends PureComponent<Props, State> {
         // $FlowFixMe validations
         onSubmit({
           email: state.email,
-          emailOptIn: state.acceptEmail,
+          emailOptIn: !!state.acceptEmail,
         });
       });
     } else {
@@ -91,8 +90,10 @@ export default class Landing extends PureComponent<Props, State> {
   @boundMethod
   onInputBlur(inputId: string) {
     this.setState((prevState: State) => ({
-      ...prevState.visibleValidations,
-      [inputId]: true,
+      visibleValidations: {
+        ...prevState.visibleValidations,
+        [inputId]: true,
+      },
     }));
   }
 
@@ -117,9 +118,15 @@ export default class Landing extends PureComponent<Props, State> {
 
   @boundMethod
   acceptTerms() {
-    this.setState({
+    const newState = {
+      ...this.state,
       acceptTerms: true,
       isViewingTerms: false,
+    };
+
+    this.setState({
+      ...newState,
+      validationObject: validate(newState, landingValidations),
     });
   }
 
@@ -128,6 +135,7 @@ export default class Landing extends PureComponent<Props, State> {
       isViewingTerms,
     } = this.state;
 
+    console.log('STATE', this.state);
     return (
       <>
         <ContentContainer

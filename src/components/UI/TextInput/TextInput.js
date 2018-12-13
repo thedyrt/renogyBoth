@@ -99,12 +99,6 @@ export class TextInput extends PureComponent<Props> {
             value={value}
           />
         </View>
-        {/* {showValidationMessage && (
-          <ValidationErrorMessage
-            validations={validations}
-            shouldShowMessage={showValidations || forceValidations}
-          />
-        )} */}
       </>
     );
   }

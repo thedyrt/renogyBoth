@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { StatusBar, YellowBox } from 'react-native';
+import { StatusBar, YellowBox, Keyboard } from 'react-native';
 import { boundMethod } from 'autobind-decorator';
 
 import {
@@ -27,6 +27,7 @@ export default class App extends Component<Props, State> {
 
   @boundMethod
   addUserEmail() {
+    Keyboard.dismiss();
     this.setState({
       isViewingSuccess: true,
     });
@@ -34,6 +35,7 @@ export default class App extends Component<Props, State> {
 
   @boundMethod
   reset() {
+    Keyboard.dismiss();
     this.setState({
       isViewingSuccess: false,
     });
@@ -41,6 +43,7 @@ export default class App extends Component<Props, State> {
 
   @boundMethod
   addUserPhone() {
+    Keyboard.dismiss();
     this.setState({
       isViewingSuccess: false,
     });

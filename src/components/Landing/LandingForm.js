@@ -76,6 +76,7 @@ export default class Landing extends PureComponent<Props> {
         </Text>
         <View style={styles.input}>
           <TextInput
+            id="email"
             keyboardType="email-address"
             onBlur={onInputBlur}
             onChangeText={updateEmail}

@@ -109,6 +109,7 @@ export default class Landing extends PureComponent<Props, State> {
   @boundMethod
   onSubmit() {
     const { onSubmit } = this.props;
+
     this.setState((prevState: State) => ({
       phoneNumberPartsValidation: validate(prevState, phoneNumberValidations),
       visibleValidations: {
