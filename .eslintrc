@@ -35,7 +35,8 @@
     "react/prefer-stateless-function": 0,
     "react/require-default-props" : 0,
     "react/sort-comp": 0,
-    "react/no-did-update-set-state": 0
+    "react/no-did-update-set-state": 0,
+    "max-len": ["error", { "code": 10000 }]
   },
   "settings": {
     "import/resolver": {

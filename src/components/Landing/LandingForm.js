@@ -12,6 +12,7 @@ import {
   Checkbox,
   Text,
   TextInput,
+  ValidationErrorMessage,
 } from 'UI';
 
 import styles from './LandingForm.css.js';
@@ -21,13 +22,13 @@ type Props = {
   acceptEmail: true | void,
   acceptTerms: true | void,
   email?: string,
-  forceValidations: boolean,
-  formSubmitted: boolean,
+  onInputBlur: (inputId: sring) => void,
   onSubmit: () => void,
   onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,
   updateEmail: (email: string) => void,
-  validationObject: Object,
+  validationObject: ValidationObject,
+  visibleValidations: VisibleValidations,
 };
 
 export default class Landing extends PureComponent<Props> {
@@ -37,12 +38,12 @@ export default class Landing extends PureComponent<Props> {
       acceptEmail,
       acceptTerms,
       email,
-      forceValidations,
-      formSubmitted,
+      onInputBlur,
       onSubmit,
       toggleViewTerms,
       updateEmail,
       validationObject = {},
+      visibleValidations = {},
     } = this.props;
 
     return (
@@ -75,23 +76,26 @@ export default class Landing extends PureComponent<Props> {
         </Text>
         <View style={styles.input}>
           <TextInput
-            shouldResetState={formSubmitted}
-            forceValidations={forceValidations}
             keyboardType="email-address"
+            onBlur={onInputBlur}
             onChangeText={updateEmail}
             placeholder="Enter Email"
             showValidationMessage
-            value={email}
+            showValidations={visibleValidations.email}
             validations={validationObject.email}
+            value={email}
+          />
+          <ValidationErrorMessage
+            validations={validationObject.email}
+            showValidations={visibleValidations.email}
           />
         </View>
         <Checkbox
-          shouldResetState={formSubmitted}
           checked={!!acceptTerms}
           id="acceptTerms"
           toggleChecked={acceptCondition}
-          isInvalid={!!validationObject.acceptTerms}
-          forceValidations={forceValidations}
+          validations={validationObject.acceptTerms}
+          showValidations={visibleValidations.acceptTerms}
         >
           <View style={styles.terms}>
             <Text

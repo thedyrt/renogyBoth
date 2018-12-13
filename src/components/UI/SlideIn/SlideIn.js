@@ -25,7 +25,7 @@ export class SlideIn extends PureComponent<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    
+
     const { isVisible } = props;
     this.slideAnim = new Animated.Value(
       // 0
@@ -75,7 +75,7 @@ export class SlideIn extends PureComponent<Props, State> {
       ).start();
     });
   }
-  
+
   render() {
     const {
       children,
@@ -104,4 +104,3 @@ export class SlideIn extends PureComponent<Props, State> {
     );
   }
 }
-

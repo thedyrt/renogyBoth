@@ -17,10 +17,10 @@ export default StyleSheet.create({
     marginBottom: standards.marginSmall,
   },
   input3: {
-    width: 80,
+    width: 85,
   },
   input4: {
-    width: 90,
+    width: 95,
   },
   error: {
     justifyContent: 'center',

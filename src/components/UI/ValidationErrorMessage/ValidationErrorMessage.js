@@ -12,25 +12,26 @@ import {
 import styles from './ValidationErrorMessage.css.js';
 
 type Props = {
-  validations?: string[],
-  shouldShowMessage: boolean,
+  validations: ValidationMessages,
+  showValidations: boolean,
 };
 export class ValidationErrorMessage extends PureComponent<Props> {
   static defaultProps = {
-    shouldShowMessage: true,
+    showValidations: false,
+    validations: [],
   };
 
   render() {
     const {
-      validations = [],
-      shouldShowMessage,
+      showValidations,
+      validations,
     } = this.props;
 
     const message = validations[0];
 
     return (
       <View style={styles.error}>
-        {message && shouldShowMessage && (
+        {message && showValidations && (
           <Text
             fontColor="red"
           >

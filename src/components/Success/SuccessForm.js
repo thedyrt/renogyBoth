@@ -3,11 +3,11 @@
 import React, { PureComponent } from 'react';
 import {
   View,
-  TouchableOpacity,
   KeyboardAvoidingView,
 } from 'react-native';
 import validate from 'validate.js';
 import { boundMethod } from 'autobind-decorator';
+import { get } from 'lodash';
 
 import { phoneNumberValidations } from 'constants/validations';
 
@@ -26,11 +26,12 @@ type Props = {
   areaCode?: string,
   prefix?: string,
   lineNumber?: string,
-  phoneNumberValidations?: string[],
+  phoneNumberValidations?: ValidationMessages,
 };
 
 type State = {
-  phoneNumberPartsValidation: Object,
+  phoneNumberPartsValidation: ValidationObject,
+  visibleValidations: VisibleValidations,
 };
 
 const nextInput = {
@@ -40,15 +41,16 @@ const nextInput = {
 
 export default class Landing extends PureComponent<Props, State> {
   onSubmit: Function;
-  
+
   areaCodeRef = React.createRef();
 
   prefixRef = React.createRef();
-  
+
   lineNumberRef = React.createRef();
 
   state = {
     phoneNumberPartsValidation: validate({}, phoneNumberValidations),
+    visibleValidations: {},
   };
 
   @boundMethod
@@ -79,7 +81,17 @@ export default class Landing extends PureComponent<Props, State> {
   }
 
   @boundMethod
-  onSubmitEditing(id: string) {
+  onInputBlur(inputId: string) {
+    this.setState((prevState: State) => ({
+      visibleValidations: {
+        ...prevState.visibleValidations,
+        [inputId]: true,
+      },
+    }));
+  }
+
+  @boundMethod
+  onNext(id: string) {
     const { props } = this;
     const value = props[id];
 
@@ -94,6 +106,21 @@ export default class Landing extends PureComponent<Props, State> {
     });
   }
 
+  @boundMethod
+  onSubmit() {
+    const { onSubmit } = this.props;
+    this.setState((prevState: State) => ({
+      phoneNumberPartsValidation: validate(prevState, phoneNumberValidations),
+      visibleValidations: {
+        areaCode: !!(get(prevState, ['phoneNumberPartsValidation', 'areaCode']) || []).length,
+        prefix: !!(get(prevState, ['phoneNumberPartsValidation', 'prefix']) || []).length,
+        lineNumber: !!(get(prevState, ['phoneNumberPartsValidation', 'lineNumber']) || []).length,
+      },
+    }), () => {
+      onSubmit();
+    });
+  }
+
   focusNextInput(value: string, id: string) {
     // $FlowFixMe
     const { current: nextInputEl } = this[nextInput[id]] || {};
@@ -103,17 +130,16 @@ export default class Landing extends PureComponent<Props, State> {
     }
   }
 
-
   render() {
     const {
       areaCode,
       lineNumber,
-      onSubmit,
       phoneNumberValidations,
       prefix,
     } = this.props;
     const {
       phoneNumberPartsValidation = {},
+      visibleValidations = {},
     } = this.state;
 
     return (
@@ -158,8 +184,10 @@ export default class Landing extends PureComponent<Props, State> {
                 keyboardType="numeric"
                 maxLength={3}
                 onChangeText={this.onChangeText}
-                onSubmitEditing={this.onSubmitEditing}
+                onBlur={this.onInputBlur}
+                onSubmitEditing={this.onNext}
                 returnKeyType="next"
+                showValidations={visibleValidations.areaCode}
                 validations={phoneNumberPartsValidation.areaCode}
                 value={areaCode}
               />
@@ -172,8 +200,10 @@ export default class Landing extends PureComponent<Props, State> {
                 keyboardType="numeric"
                 maxLength={3}
                 onChangeText={this.onChangeText}
-                onSubmitEditing={this.onSubmitEditing}
+                onBlur={this.onInputBlur}
+                onSubmitEditing={this.onNext}
                 returnKeyType="next"
+                showValidations={visibleValidations.prefix}
                 validations={phoneNumberPartsValidation.prefix}
                 value={prefix}
               />
@@ -186,18 +216,20 @@ export default class Landing extends PureComponent<Props, State> {
                 keyboardType="phone-pad"
                 maxLength={4}
                 onChangeText={this.onChangeText}
-                onSubmitEditing={onSubmit}
+                onBlur={this.onInputBlur}
+                onSubmitEditing={this.onSubmit}
+                showValidations={visibleValidations.lineNumber}
                 validations={phoneNumberPartsValidation.lineNumber}
                 value={lineNumber}
               />
             </View>
           </View>
           <View style={styles.error}>
-            <ValidationErrorMessage validations={phoneNumberValidations} />
+            <ValidationErrorMessage validations={phoneNumberValidations} showValidations />
           </View>
           <Button
             label="SUBMIT"
-            onPress={onSubmit}
+            onPress={this.onSubmit}
           />
         </View>
       </KeyboardAvoidingView>

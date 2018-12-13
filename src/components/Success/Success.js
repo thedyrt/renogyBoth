@@ -22,7 +22,7 @@ type State = {
   areaCode?: string,
   prefix?: string,
   lineNumber?: string,
-  phoneNumberValidations?: string[],
+  phoneNumberValidations?: ValidationMessages,
 };
 
 const INACTVE_THRESHOLD = 5000;
@@ -56,7 +56,7 @@ export default class Landing extends PureComponent<Props, State> {
       prefix,
       lineNumber,
     } = this.state;
-    
+
     this.stopClock();
 
     const phoneNumber = +`${areaCode || ''}${prefix || ''}${lineNumber || ''}`;

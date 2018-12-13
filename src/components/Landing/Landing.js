@@ -25,20 +25,18 @@ type State = {
   acceptEmail: true | void,
   acceptTerms: true | void,
   email?: string,
-  forceValidations: boolean,
   isViewingTerms: boolean,
-  validationObject: string[],
-  formSubmitted: boolean,
+  validationObject: ValidationObject,
+  visibleValidations: VisibleValidations,
 };
 
 const cleanState = ({
   acceptEmail: true,
   acceptTerms: undefined,
-  forceValidations: false,
   isViewingTerms: false,
   validationObject: validate({ acceptTerms: true, email: undefined }, landingValidations),
+  visibleValidations: {},
   email: '',
-  formSubmitted: false,
 }: Object);
 
 export default class Landing extends PureComponent<Props, State> {
@@ -54,22 +52,17 @@ export default class Landing extends PureComponent<Props, State> {
     if (isEmpty(validationObject)) {
       this.setState({
         ...cleanState,
-        formSubmitted: true,
       }, () => {
         // $FlowFixMe validations
         onSubmit({
           email: state.email,
           emailOptIn: state.acceptEmail,
         });
-
-        this.setState({
-          formSubmitted: false,
-        });
       });
     } else {
       this.setState({
         validationObject,
-        forceValidations: true,
+        visibleValidations: { email: true, acceptTerms: true },
       });
     }
   }
@@ -95,12 +88,24 @@ export default class Landing extends PureComponent<Props, State> {
   }
 
   @boundMethod
+  onInputBlur(inputId: string) {
+    this.setState((prevState: State) => ({
+      ...prevState.visibleValidations,
+      [inputId]: true,
+    }));
+  }
+
+  @boundMethod
   acceptCondition(id: 'acceptTerms' | 'acceptEmail') {
     const { state } = this;
 
     const newState = {
       ...state,
       [id]: state[id] === true ? undefined : true,
+      visibleValidations: {
+        ...state.visibleValidations,
+        [id]: true,
+      },
     };
 
     this.setState({
@@ -132,6 +137,7 @@ export default class Landing extends PureComponent<Props, State> {
             onSubmit={this.onSubmit}
             updateEmail={this.updateEmail}
             acceptCondition={this.acceptCondition}
+            onInputBlur={this.onInputBlur}
             {...this.state}
           />
         </ContentContainer>

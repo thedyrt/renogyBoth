@@ -7,49 +7,33 @@ import {
 } from 'react-native';
 import { boundMethod } from 'autobind-decorator';
 
-import {
-  ValidationErrorMessage,
-} from 'UI';
-
 import styles from './TextInput.css.js';
 
 type Props = {
   autoFocus?: boolean,
-  forceValidations: boolean,
   id: string,
   inputRef?: any,
   keyboardType: 'email-address' | 'numeric',
   maxLength?: number,
+  onBlur: (id: string) => void,
   onChangeText: (value: string, id: string) => void,
   onSubmitEditing: (id: string) => void,
   placeholder?: string,
   returnKeyType: 'done' | 'next',
-  shouldResetState: boolean,
-  showValidationMessage: boolean,
-  validations?: string[],
+  showValidations: boolean,
+  validations: ValidationMessages,
   value: string,
 };
 
-type State = {
-  showValidations: boolean,
-};
-
-export class TextInput extends PureComponent<Props, State> {
+export class TextInput extends PureComponent<Props> {
   static defaultProps = {
+    onBlur: () => {},
     onChangeText: () => {},
     onSubmitEditing: () => {},
     returnKeyType: 'done',
-  };
-
-  state = {
     showValidations: false,
+    validations: [],
   };
-
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.shouldResetState && !prevProps.shouldResetState) {
-      this.setState({});
-    }
-  }
 
   @boundMethod
   onChangeText(value: string) {
@@ -67,36 +51,35 @@ export class TextInput extends PureComponent<Props, State> {
       onSubmitEditing,
       id,
     } = this.props;
-    
-    this.setState({
-      showValidations: true,
-    }, () => {
-      onSubmitEditing(id);
-    });
+
+    onSubmitEditing(id);
   }
 
   @boundMethod
   onBlur() {
-    this.setState({ showValidations: true });
+    const {
+      onBlur,
+      id,
+    } = this.props;
+
+    onBlur(id);
   }
 
   render() {
     const {
       autoFocus,
-      forceValidations,
       inputRef,
       keyboardType,
       maxLength,
       placeholder,
       returnKeyType,
-      showValidationMessage,
-      validations = [],
+      showValidations,
+      validations,
       value,
     } = this.props;
 
-    const { showValidations } = this.state;
     const validation = validations[0];
-    const error = (showValidations || forceValidations) && validation;
+    const error = validation && showValidations;
 
     return (
       <>
@@ -116,12 +99,12 @@ export class TextInput extends PureComponent<Props, State> {
             value={value}
           />
         </View>
-        {showValidationMessage && (
+        {/* {showValidationMessage && (
           <ValidationErrorMessage
             validations={validations}
             shouldShowMessage={showValidations || forceValidations}
           />
-        )}
+        )} */}
       </>
     );
   }
