@@ -10,7 +10,8 @@
   },
   "rnpm": {
     "assets": [
-      "./assets/fonts/Dosis/"
+      "./assets/fonts/Dosis/",
+      "./assets/fonts/OpenSans/"
     ]
   },
   "dependencies": {
