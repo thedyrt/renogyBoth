@@ -35,6 +35,7 @@ esproposal.nullish_coalescing=enable
 
 module.system=haste
 
+module.name_mapper='^services\/?\(.*\)$' -> '<PROJECT_ROOT>/src/services/\1'
 module.name_mapper='^constants\/?\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
 module.name_mapper='^components\/?\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
 module.name_mapper='^UI\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/UI/\1'

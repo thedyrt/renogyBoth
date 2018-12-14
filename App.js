@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { StatusBar, YellowBox, Keyboard } from 'react-native';
 import { boundMethod } from 'autobind-decorator';
 
-import firebase from 'services/firebase';
+import { firebaseService } from 'services/firebase';
 
 import {
   SlideIn,
@@ -32,7 +32,7 @@ export default class App extends Component<Props, State> {
   addUser(user: User) {
     Keyboard.dismiss();
 
-    firebase.addUser(user);
+    firebaseService.addUser(user);
 
     this.setState({
       isViewingSuccess: false,
