@@ -35,12 +35,12 @@ const cleanState = ({
   acceptTerms: undefined,
   isViewingTerms: false,
   validationObject: {},
-  visibleValidations: {},
+  visibleValidations: { email: false, acceptTerms: false },
   email: '',
 }: Object);
 
 export default class Landing extends PureComponent<Props, State> {
-  state = cleanState;
+  state = { ...cleanState };
 
   @boundMethod
   onSubmit() {
@@ -89,12 +89,16 @@ export default class Landing extends PureComponent<Props, State> {
 
   @boundMethod
   onInputBlur(inputId: string) {
-    this.setState((prevState: State) => ({
-      visibleValidations: {
-        ...prevState.visibleValidations,
-        [inputId]: true,
-      },
-    }));
+    const { validationObject = {} } = this.state;
+
+    if (validationObject[inputId]) {
+      this.setState((prevState: State) => ({
+        visibleValidations: {
+          ...prevState.visibleValidations,
+          [inputId]: true,
+        },
+      }));
+    }
   }
 
   @boundMethod
@@ -135,7 +139,6 @@ export default class Landing extends PureComponent<Props, State> {
       isViewingTerms,
     } = this.state;
 
-    console.log('STATE', this.state);
     return (
       <>
         <ContentContainer

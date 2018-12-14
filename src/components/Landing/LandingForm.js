@@ -22,7 +22,7 @@ type Props = {
   acceptEmail: true | void,
   acceptTerms: true | void,
   email?: string,
-  onInputBlur: (inputId: sring) => void,
+  onInputBlur: (inputId: string) => void,
   onSubmit: () => void,
   onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,

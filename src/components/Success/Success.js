@@ -25,7 +25,7 @@ type State = {
   phoneNumberValidations?: ValidationMessages,
 };
 
-const INACTVE_THRESHOLD = 5000;
+const INACTVE_THRESHOLD = 6000;
 
 export default class Landing extends PureComponent<Props, State> {
   inactiveTimeout: any;

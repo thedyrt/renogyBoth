@@ -7,7 +7,7 @@ import {
 
 import styles from './LandingFooter.css.js';
 
-export default class LandingFooter extends PureComponent<Props, State> {
+export default class LandingFooter extends PureComponent<{}> {
   render() {
     return (
       <Image

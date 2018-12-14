@@ -111,7 +111,6 @@ export default class Landing extends PureComponent<Props, State> {
     const { onSubmit } = this.props;
 
     this.setState((prevState: State) => ({
-      phoneNumberPartsValidation: validate(prevState, phoneNumberValidations),
       visibleValidations: {
         areaCode: !!(get(prevState, ['phoneNumberPartsValidation', 'areaCode']) || []).length,
         prefix: !!(get(prevState, ['phoneNumberPartsValidation', 'prefix']) || []).length,

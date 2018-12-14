@@ -11,8 +11,7 @@ class FirebaseService {
   }
 
   async addUser(user: User) {
-    const addedUser = await this.db.add(user);
-    console.log(addedUser);
+    await this.db.add(user);
   }
 }
 export const firebaseService = new FirebaseService();

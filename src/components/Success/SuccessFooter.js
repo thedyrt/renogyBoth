@@ -8,7 +8,7 @@ import {
 
 import styles from './SuccessFooter.css.js';
 
-export default class Landing extends PureComponent<Props, State> {
+export default class Landing extends PureComponent<{}> {
   render() {
     return (
       <View
