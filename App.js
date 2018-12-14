@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { StatusBar, YellowBox, Keyboard } from 'react-native';
 import { boundMethod } from 'autobind-decorator';
 
+import firebase from 'services/firebase';
+
 import {
   SlideIn,
 } from 'UI';
@@ -17,35 +19,46 @@ type Props = {};
 type State = {
   isViewingSuccess: boolean,
   hideLanding: boolean,
+  user: User,
 };
 
 export default class App extends Component<Props, State> {
   state = {
     isViewingSuccess: false,
     hideLanding: false,
+    user: ({}: Object),
   };
 
+  addUser(user: User) {
+    Keyboard.dismiss();
+
+    firebase.addUser(user);
+
+    this.setState({
+      isViewingSuccess: false,
+      user: ({}: Object),
+    });
+  }
+
   @boundMethod
-  addUserEmail() {
+  addUserEmail(user: User) {
     Keyboard.dismiss();
     this.setState({
       isViewingSuccess: true,
+      user,
     });
   }
 
   @boundMethod
   reset() {
-    Keyboard.dismiss();
-    this.setState({
-      isViewingSuccess: false,
-    });
+    this.addUser(this.state.user);
   }
 
   @boundMethod
-  addUserPhone() {
-    Keyboard.dismiss();
-    this.setState({
-      isViewingSuccess: false,
+  addUserPhone(phoneNumber: number) {
+    this.addUser({
+      ...this.state.user,
+      phoneNumber,
     });
   }
 
