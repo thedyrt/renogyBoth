@@ -4,14 +4,14 @@ import firebase from 'react-native-firebase';
 
 
 class FirebaseService {
-  db: any;
+  ref: any;
 
   constructor() {
-    this.db = firebase.firestore().collection('users');
+    this.ref = firebase.firestore().collection('users');
   }
 
   async addUser(user: User) {
-    await this.db.add(user);
+    await this.ref.add(user);
   }
 }
 export const firebaseService = new FirebaseService();
