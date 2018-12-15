@@ -3,15 +3,47 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "flow": "node_modules/.bin/flow",
+    "lint": "node_modules/.bin/eslint src index.js App.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/Dosis/",
+      "./assets/fonts/OpenSans/"
+    ]
+  },
   "dependencies": {
+    "add": "^2.0.6",
+    "autobind-decorator": "^2.4.0",
+    "lodash": "^4.17.11",
     "react": "16.6.1",
-    "react-native": "0.57.7"
+    "react-native": "0.57.7",
+    "react-native-firebase": "^5.1.1",
+    "validate.js": "^0.12.0",
+    "yarn": "^1.12.3"
   },
   "devDependencies": {
-    "babel-jest": "23.6.0",
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@babel/preset-flow": "7.0.0-beta.55",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "22.2.2",
+    "babel-plugin-flow-react-proptypes": "^18.0.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-inline-environment-variables": "^0.0.2",
+    "babel-preset-react-native": "5.0.2",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-babel-module": "5.0.0-beta.1",
+    "eslint-plugin-babel": "^4.0.1",
+    "eslint-plugin-flowtype": "^3.2.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.83.0",
+    "flow-typed": "^2.4.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
     "react-test-renderer": "16.6.1"

@@ -28,11 +28,22 @@ node_modules/react-native/flow-github/
 
 [options]
 emoji=true
+esproposal.decorators=ignore
 
 esproposal.optional_chaining=enable
 esproposal.nullish_coalescing=enable
 
 module.system=haste
+
+module.name_mapper='^services\/?\(.*\)$' -> '<PROJECT_ROOT>/src/services/\1'
+module.name_mapper='^constants\/?\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
+module.name_mapper='^components\/?\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^UI\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/UI/\1'
+module.name_mapper='^UI$' -> '<PROJECT_ROOT>/src/components/UI'
+module.name_mapper='^Wrappers\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/Wrappers/\1'
+module.name_mapper='^Wrappers$' -> '<PROJECT_ROOT>/src/components/Wrappers'
+
+
 module.system.haste.use_name_reducers=true
 # get basename
 module.system.haste.name_reducers='^.*/\([a-zA-Z0-9$_.-]+\.js\(\.flow\)?\)$' -> '\1'
@@ -67,4 +78,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.78.0
+^0.83.0
