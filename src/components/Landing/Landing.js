@@ -15,7 +15,7 @@ import LandingForm from './LandingForm.js';
 import LandingFooter from './LandingFooter.js';
 
 type Props = {
-  onSubmit: ({ email: string, emailOptIn: boolean }) => void,
+  onSubmit: (user: User) => void,
   validationObject: ValidationObject,
   validate: Validate,
 };
@@ -31,13 +31,20 @@ const cleanState = ({
   acceptEmail: true,
   acceptTerms: undefined,
   isViewingTerms: false,
-  validationObject: {},
-  visibleValidations: { email: false, acceptTerms: false },
   email: '',
 }: Object);
 
 export default class Landing extends PureComponent<Props, State> {
   state = { ...cleanState };
+
+  static defaultProps = {
+    validationObject: {},
+  };
+
+  componentDidMount() {
+    const { validate } = this.props;
+    validate(this.state);
+  }
 
   @boundMethod
   onSubmit() {
@@ -62,6 +69,11 @@ export default class Landing extends PureComponent<Props, State> {
           email: state.email,
           emailOptIn: !!state.acceptEmail,
         });
+
+        validate(
+          this.state,
+          { email: false, acceptTerms: false },
+        );
       });
     } else {
       validate(undefined, { email: true, acceptTerms: true });
@@ -84,6 +96,8 @@ export default class Landing extends PureComponent<Props, State> {
     };
 
     validate(newState);
+
+    this.setState(newState);
   }
 
   @boundMethod

@@ -11,8 +11,6 @@ import {
   Button,
   Checkbox,
   Text,
-  TextInput,
-  ValidationErrorMessage,
 } from 'UI';
 import {
   WithValidations,
@@ -30,6 +28,8 @@ type Props = {
   toggleViewTerms: () => void,
   updateEmail: (email: string) => void,
 };
+
+const noOp = () => {};
 
 export default class Landing extends PureComponent<Props> {
   render() {
@@ -75,6 +75,7 @@ export default class Landing extends PureComponent<Props> {
           <WithValidations.TextInput
             id="email"
             keyboardType="email-address"
+            onBlur={noOp}
             onChangeText={updateEmail}
             onSubmitEditing={onSubmit}
             placeholder="Enter Email"

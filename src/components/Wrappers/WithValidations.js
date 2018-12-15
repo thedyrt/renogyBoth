@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import type { Node } from 'react';
 import validate from 'validate.js';
 import { boundMethod } from 'autobind-decorator';
@@ -25,13 +25,13 @@ type Props = {
 
 const ValidationContext = React.createContext({});
 
-export class WithValidations extends PureComponent<Props, State> {
+export class WithValidations extends Component<Props, State> {
   static TextInput = (props: Object) => (
     <ValidationContext.Consumer>
       {({
         udpateComponentVisibilityState,
-        validationObject,
-        visibleValidations,
+        validationObject = {},
+        visibleValidations = {},
       }) => (
         <TextInput
           onBlur={udpateComponentVisibilityState}
@@ -42,12 +42,12 @@ export class WithValidations extends PureComponent<Props, State> {
       )}
     </ValidationContext.Consumer>
   );
- 
+
   static Checkbox = (props: Object) => (
     <ValidationContext.Consumer>
       {({
-        validationObject,
-        visibleValidations,
+        validationObject = {},
+        visibleValidations = {},
       }) => (
         <Checkbox
           validations={validationObject[props.id]}
@@ -61,8 +61,8 @@ export class WithValidations extends PureComponent<Props, State> {
   static ValidationErrorMessage = (props: Object) => (
     <ValidationContext.Consumer>
       {({
-        validationObject,
-        visibleValidations,
+        validationObject = {},
+        visibleValidations = {},
       }) => (
         <ValidationErrorMessage
           validations={validationObject[props.id]}
@@ -85,15 +85,20 @@ export class WithValidations extends PureComponent<Props, State> {
   @boundMethod
   validate(resource?: Object, newVisibilityState?: VisibleValidations) {
     const { validationRules } = this.props;
+    const validationObject = resource
+      ? validate(resource, validationRules)
+      : undefined;
 
     this.setState({
       ...resource
-        ? { validationObject: validate(resource, validationRules) }
+        ? { validationObject }
         : {},
       ...newVisibilityState
         ? { visibleValidations: newVisibilityState }
         : {},
     });
+
+    return validationObject;
   }
 
   @boundMethod
@@ -109,6 +114,7 @@ export class WithValidations extends PureComponent<Props, State> {
 
   render() {
     const { render } = this.props;
+
     return (
       <ValidationContext.Provider value={this.state}>
         {render(this.state)}

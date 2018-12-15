@@ -6,7 +6,10 @@ import { boundMethod } from 'autobind-decorator';
 
 import { firebaseService } from 'services/firebase';
 
-import { landingValidations } from 'constants/validations';
+import {
+  landingValidations,
+  successValidations,
+} from 'constants/validations';
 
 import {
   SlideIn,
@@ -67,17 +70,37 @@ export default class App extends Component<Props, State> {
     });
   }
 
+  @boundMethod
   renderLanding(
-    validationState: { validate: Validate, validationObject: validationObject },
+    validationState: { validate: Validate, validationObject: ValidationObject },
   ) {
     const {
       validate,
       validationObject,
     } = validationState;
-    
+
     return (
       <Landing
         onSubmit={this.addUserEmail}
+        validate={validate}
+        validationObject={validationObject}
+      />
+    );
+  }
+
+  @boundMethod
+  renderSuccess(
+    validationState: { validate: Validate, validationObject: ValidationObject },
+  ) {
+    const {
+      validate,
+      validationObject,
+    } = validationState;
+
+    return (
+      <Success
+        onSubmit={this.addUserPhone}
+        onInactive={this.reset}
         validate={validate}
         validationObject={validationObject}
       />
@@ -98,14 +121,11 @@ export default class App extends Component<Props, State> {
             validationRules={landingValidations}
             render={this.renderLanding}
           />
-          // <Landing
-          //   onSubmit={this.addUserEmail}
-          // />
         )}
         <SlideIn isVisible={isViewingSuccess}>
-          <Success
-            onSubmit={this.addUserPhone}
-            onInactive={this.reset}
+          <WithValidations
+            render={this.renderSuccess}
+            validationRules={successValidations}
           />
         </SlideIn>
       </>

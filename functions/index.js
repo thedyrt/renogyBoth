@@ -14,24 +14,6 @@ exports.onUserAdded = functions.firestore
   .onCreate((snapshot, context) => {
     const user = snapshot.data();
 
-    console.log('wtf')
-    // return request('https://www.nytimes.com/');
-
-    // return new Promise((resolve, reject) => {
-    //   const req = https.request({
-    //     method: 'GET',
-    //     hostname: 'https://www.nytimes.com/',
-    //     path: '/',
-    //   }, (res) => {
-    //     res.on('data', () => {
-    //       resolve();
-    //     })
-    //   })
-    //   req.on('error', reject);
-
-    //   req.end();
-    // })
-
     return Promise.all([
       user.emailOptIn ? addToMailingList(user) : Promise.resolve(),
       user.phoneNumeer ? requestAppDownload(user) : Promise.resolve(),

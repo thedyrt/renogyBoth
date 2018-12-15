@@ -38,6 +38,5 @@ export const successValidations = {
     numericality: {
       onlyInteger: true,
     },
-    presence: true,
   },
 };

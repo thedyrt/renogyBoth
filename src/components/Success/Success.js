@@ -1,10 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import validate from 'validate.js';
 import { boundMethod } from 'autobind-decorator';
-
-import { successValidations } from 'constants/validations';
 
 import {
   ContentContainer,
@@ -16,13 +13,14 @@ import SuccessForm from './SuccessForm.js';
 type Props = {
   onSubmit: (phoneNumber: number) => void,
   onInactive: () => void,
+  validate: Validate,
+  validationObject: ValidationObject,
 };
 
 type State = {
   areaCode?: string,
   prefix?: string,
   lineNumber?: string,
-  phoneNumberValidations?: ValidationMessages,
 };
 
 const INACTVE_THRESHOLD = 6000;
@@ -30,9 +28,15 @@ const INACTVE_THRESHOLD = 6000;
 export default class Landing extends PureComponent<Props, State> {
   inactiveTimeout: any;
 
+  static defaultProps = {
+    validationObject: {},
+  };
+
   state = {};
 
   componentDidMount() {
+    const { validate } = this.props;
+    validate(this.state);
     this.startClock();
   }
 
@@ -56,6 +60,9 @@ export default class Landing extends PureComponent<Props, State> {
       prefix,
       lineNumber,
     } = this.state;
+    const {
+      validate,
+    } = this.props;
 
     this.stopClock();
 
@@ -67,15 +74,16 @@ export default class Landing extends PureComponent<Props, State> {
         lineNumber,
         phoneNumber,
       },
-      successValidations,
+      {
+        phoneNumber: true,
+        areaCode: true,
+        prefix: true,
+        lineNumber: true,
+      },
     );
 
     if (phoneNumberValidation) {
-      this.setState({
-        phoneNumberValidations: ['Phone number is invalid, please try again'],
-      }, () => {
-        this.startClock();
-      });
+      this.startClock();
     } else {
       const {
         onSubmit,
@@ -90,20 +98,26 @@ export default class Landing extends PureComponent<Props, State> {
   @boundMethod
   updatePhoneNumber(number: string, id: string) {
     this.stopClock();
-    this.setState({
-      [id]: number,
-      phoneNumberValidations: undefined,
-    }, () => {
-      this.stopClock();
-    });
+
+    this.setState(
+      { [id]: number },
+      () => {
+        this.stopClock();
+      },
+    );
   }
 
   render() {
+    const {
+      validate,
+    } = this.props;
+
     return (
       <ContentContainer FooterComponent={SuccessFooter}>
         <SuccessForm
           updatePhoneNumber={this.updatePhoneNumber}
           onSubmit={this.onSubmit}
+          validate={validate}
           {...this.state}
         />
       </ContentContainer>
