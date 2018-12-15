@@ -1,11 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import validate from 'validate.js';
 import { boundMethod } from 'autobind-decorator';
 import { isEmpty } from 'lodash';
-
-import { landingValidations } from 'constants/validations';
 
 import TermsAndConditions from 'components/TermsAndConditions/TermsAndConditions.js';
 
@@ -19,6 +16,8 @@ import LandingFooter from './LandingFooter.js';
 
 type Props = {
   onSubmit: ({ email: string, emailOptIn: boolean }) => void,
+  validationObject: ValidationObject,
+  validate: Validate,
 };
 
 type State = {
@@ -26,8 +25,6 @@ type State = {
   acceptTerms: true | void,
   email?: string,
   isViewingTerms: boolean,
-  validationObject: ValidationObject,
-  visibleValidations: VisibleValidations,
 };
 
 const cleanState = ({
@@ -44,12 +41,19 @@ export default class Landing extends PureComponent<Props, State> {
 
   @boundMethod
   onSubmit() {
-    const { onSubmit } = this.props;
+    const {
+      onSubmit,
+      validationObject,
+      validate,
+    } = this.props;
     const { state } = this;
 
-    const validationObject = validate(state, landingValidations);
-
     if (isEmpty(validationObject)) {
+      validate(
+        {},
+        { email: false, acceptTerms: false },
+      );
+
       this.setState({
         ...cleanState,
       }, () => {
@@ -60,10 +64,7 @@ export default class Landing extends PureComponent<Props, State> {
         });
       });
     } else {
-      this.setState({
-        validationObject,
-        visibleValidations: { email: true, acceptTerms: true },
-      });
+      validate(undefined, { email: true, acceptTerms: true });
     }
   }
 
@@ -76,62 +77,45 @@ export default class Landing extends PureComponent<Props, State> {
 
   @boundMethod
   updateEmail(email: string) {
+    const { validate } = this.props;
     const newState = {
       ...this.state,
       email,
     };
 
-    this.setState({
-      ...newState,
-      validationObject: validate(newState, landingValidations),
-    });
-  }
-
-  @boundMethod
-  onInputBlur(inputId: string) {
-    const { validationObject = {} } = this.state;
-
-    if (validationObject[inputId]) {
-      this.setState((prevState: State) => ({
-        visibleValidations: {
-          ...prevState.visibleValidations,
-          [inputId]: true,
-        },
-      }));
-    }
+    validate(newState);
   }
 
   @boundMethod
   acceptCondition(id: 'acceptTerms' | 'acceptEmail') {
+    const { validate } = this.props;
     const { state } = this;
 
     const newState = {
       ...state,
       [id]: state[id] === true ? undefined : true,
-      visibleValidations: {
-        ...state.visibleValidations,
-        [id]: true,
-      },
     };
 
-    this.setState({
-      ...newState,
-      validationObject: validate(newState, landingValidations),
-    });
+    validate(newState, { [id]: true });
+
+    this.setState(newState);
   }
 
   @boundMethod
   acceptTerms() {
+    const {
+      validate,
+    } = this.props;
+
     const newState = {
       ...this.state,
       acceptTerms: true,
       isViewingTerms: false,
     };
 
-    this.setState({
-      ...newState,
-      validationObject: validate(newState, landingValidations),
-    });
+    validate(newState);
+
+    this.setState(newState);
   }
 
   render() {
@@ -149,7 +133,6 @@ export default class Landing extends PureComponent<Props, State> {
             onSubmit={this.onSubmit}
             updateEmail={this.updateEmail}
             acceptCondition={this.acceptCondition}
-            onInputBlur={this.onInputBlur}
             {...this.state}
           />
         </ContentContainer>

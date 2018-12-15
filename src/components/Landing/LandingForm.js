@@ -14,6 +14,9 @@ import {
   TextInput,
   ValidationErrorMessage,
 } from 'UI';
+import {
+  WithValidations,
+} from 'Wrappers';
 
 import styles from './LandingForm.css.js';
 
@@ -22,13 +25,10 @@ type Props = {
   acceptEmail: true | void,
   acceptTerms: true | void,
   email?: string,
-  onInputBlur: (inputId: string) => void,
   onSubmit: () => void,
   onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,
   updateEmail: (email: string) => void,
-  validationObject: ValidationObject,
-  visibleValidations: VisibleValidations,
 };
 
 export default class Landing extends PureComponent<Props> {
@@ -38,12 +38,9 @@ export default class Landing extends PureComponent<Props> {
       acceptEmail,
       acceptTerms,
       email,
-      onInputBlur,
       onSubmit,
       toggleViewTerms,
       updateEmail,
-      validationObject = {},
-      visibleValidations = {},
     } = this.props;
 
     return (
@@ -75,29 +72,23 @@ export default class Landing extends PureComponent<Props> {
           Every month for 12 months, Renogy is giving away a $500 Renogy gift card to one luck winner.
         </Text>
         <View style={styles.input}>
-          <TextInput
+          <WithValidations.TextInput
             id="email"
             keyboardType="email-address"
-            onBlur={onInputBlur}
             onChangeText={updateEmail}
             onSubmitEditing={onSubmit}
             placeholder="Enter Email"
             showValidationMessage
-            showValidations={visibleValidations.email}
-            validations={validationObject.email}
             value={email}
           />
-          <ValidationErrorMessage
-            validations={validationObject.email}
-            showValidations={visibleValidations.email}
+          <WithValidations.ValidationErrorMessage
+            id="email"
           />
         </View>
-        <Checkbox
+        <WithValidations.Checkbox
           checked={!!acceptTerms}
           id="acceptTerms"
           toggleChecked={acceptCondition}
-          validations={validationObject.acceptTerms}
-          showValidations={visibleValidations.acceptTerms}
         >
           <View style={styles.terms}>
             <Text
@@ -117,7 +108,7 @@ export default class Landing extends PureComponent<Props> {
               </Text>
             </TouchableOpacity>
           </View>
-        </Checkbox>
+        </WithValidations.Checkbox>
         <Checkbox
           checked={!!acceptEmail}
           id="acceptEmail"

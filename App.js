@@ -6,9 +6,14 @@ import { boundMethod } from 'autobind-decorator';
 
 import { firebaseService } from 'services/firebase';
 
+import { landingValidations } from 'constants/validations';
+
 import {
   SlideIn,
 } from 'UI';
+import {
+  WithValidations,
+} from 'Wrappers';
 
 import Landing from 'components/Landing/Landing.js';
 import Success from 'components/Success/Success.js';
@@ -62,6 +67,23 @@ export default class App extends Component<Props, State> {
     });
   }
 
+  renderLanding(
+    validationState: { validate: Validate, validationObject: validationObject },
+  ) {
+    const {
+      validate,
+      validationObject,
+    } = validationState;
+    
+    return (
+      <Landing
+        onSubmit={this.addUserEmail}
+        validate={validate}
+        validationObject={validationObject}
+      />
+    );
+  }
+
   render() {
     const {
       isViewingSuccess,
@@ -72,9 +94,13 @@ export default class App extends Component<Props, State> {
       <>
         <StatusBar barStyle="light-content" />
         {!hideLanding && (
-          <Landing
-            onSubmit={this.addUserEmail}
+          <WithValidations
+            validationRules={landingValidations}
+            render={this.renderLanding}
           />
+          // <Landing
+          //   onSubmit={this.addUserEmail}
+          // />
         )}
         <SlideIn isVisible={isViewingSuccess}>
           <Success

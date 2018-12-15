@@ -14,8 +14,8 @@ import {
 type State = {
   validationObject: ValidationObject,
   visibleValidations: VisibleValidations,
-  validate: (resource?: Object, newVisibilityState?: VisibleValidations) => void,
-  udpateComponentVisibilityState: (id: string, visibilityState: boolean) => void,
+  validate: Validate,
+  udpateComponentVisibilityState: UpdateComponentVisibilityState,
 };
 
 type Props = {
@@ -42,7 +42,7 @@ export class WithValidations extends PureComponent<Props, State> {
       )}
     </ValidationContext.Consumer>
   );
-
+ 
   static Checkbox = (props: Object) => (
     <ValidationContext.Consumer>
       {({
