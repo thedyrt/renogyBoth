@@ -40,6 +40,8 @@ module.name_mapper='^constants\/?\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
 module.name_mapper='^components\/?\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
 module.name_mapper='^UI\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/UI/\1'
 module.name_mapper='^UI$' -> '<PROJECT_ROOT>/src/components/UI'
+module.name_mapper='^Wrappers\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/Wrappers/\1'
+module.name_mapper='^Wrappers$' -> '<PROJECT_ROOT>/src/components/Wrappers'
 
 
 module.system.haste.use_name_reducers=true
