@@ -30,6 +30,23 @@ type State = {
   user: User,
 };
 
+
+const iterableUrl = 'https://api.iterable.com/api/';
+
+const apiKey = '94ab1e11e87c46168328663fed265cf1';
+
+const listName = 'renogyBooth';
+
+const platform = 'mobile';
+
+const operatingSystem = 'iOs';
+
+const iterableOptions = {
+  method: 'POST',
+  uri: `${iterableUrl}events/track?api_key=${apiKey}`,
+  json: true,
+};
+
 export default class App extends Component<Props, State> {
   state = {
     isViewingSuccess: false,

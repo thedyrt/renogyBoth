@@ -2,9 +2,7 @@ const functions = require('firebase-functions');
 
 const admin = require('firebase-admin');
 
-var rp = require('request-promise');
-
-// const request = require('request');
+const rp = require('request-promise');
 
 // initializes your application
 admin.initializeApp(functions.config().firebase);
@@ -16,13 +14,13 @@ exports.onUserAdded = functions.firestore
 
     return Promise.all([
       user.emailOptIn ? addToMailingList(user) : Promise.resolve(),
-      user.phoneNumeer ? requestAppDownload(user) : Promise.resolve(),
+      user.phoneNumber ? requestAppDownload(user) : Promise.resolve(),
     ]);
   });
 
-const iterableUrl = 'https://api.iterable.com/api';
+const iterableUrl = 'https://api.iterable.com/api/';
 
-const apiKey = '2b4b5f8d652f44d186c0965c08f22f6f';
+const apiKey = 'c4c87f17ec114d7b91c08bd391c1041a';
 
 const listName = 'renogyBooth';
 
