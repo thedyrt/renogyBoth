@@ -44,10 +44,10 @@
 		5FB95DD886AD4D828A7D4C00 /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 220DB49B48A641D99A6527F8 /* Dosis-ExtraLight.ttf */; };
 		65F1B06C39B7411DB5F66B36 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D64D61D9379432A930A6D57 /* OpenSans-Light.ttf */; };
 		69FD46FDE7A444EA8E63DF6E /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B937F420D2245D496DD360B /* Dosis-Bold.ttf */; };
-		71D50BBE21C4188E0051729D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71D50B9821C4188E0051729D /* GoogleService-Info.plist */; };
-		71D50BBF21C4188E0051729D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71D50B9821C4188E0051729D /* GoogleService-Info.plist */; };
-		71D50BC021C4188E0051729D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71D50B9821C4188E0051729D /* GoogleService-Info.plist */; };
-		71D50BC121C4188E0051729D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71D50B9821C4188E0051729D /* GoogleService-Info.plist */; };
+		71F1614B21C8796100F5717B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F1614A21C8796000F5717B /* GoogleService-Info.plist */; };
+		71F1614C21C8796100F5717B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F1614A21C8796000F5717B /* GoogleService-Info.plist */; };
+		71F1614D21C8796100F5717B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F1614A21C8796000F5717B /* GoogleService-Info.plist */; };
+		71F1614E21C8796100F5717B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F1614A21C8796000F5717B /* GoogleService-Info.plist */; };
 		7ABABE058E2C4723A7483F32 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05D878CD1BDA4ABE9967ADC9 /* Dosis-Regular.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		84BDFD3BA88CD4F6DBEF272D /* libPods-renogy_solar_booth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31056E91E84906FEB991CF46 /* libPods-renogy_solar_booth.a */; };
@@ -383,7 +383,7 @@
 		66A5CA6769184B279BF4217F /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../assets/fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		6B937F420D2245D496DD360B /* Dosis-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Dosis-Bold.ttf"; path = "../assets/fonts/Dosis/Dosis-Bold.ttf"; sourceTree = "<group>"; };
 		71314D5A21C3008B002693E4 /* renogy_solar_booth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = renogy_solar_booth.entitlements; path = renogy_solar_booth/renogy_solar_booth.entitlements; sourceTree = "<group>"; };
-		71D50B9821C4188E0051729D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		71F1614A21C8796000F5717B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D64D61D9379432A930A6D57 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../assets/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -535,7 +535,7 @@
 		13B07FAE1A68108700A75B9A /* renogy_solar_booth */ = {
 			isa = PBXGroup;
 			children = (
-				71D50B9821C4188E0051729D /* GoogleService-Info.plist */,
+				71F1614A21C8796000F5717B /* GoogleService-Info.plist */,
 				71314D5A21C3008B002693E4 /* renogy_solar_booth.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1177,7 +1177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71D50BBF21C4188E0051729D /* GoogleService-Info.plist in Resources */,
+				71F1614C21C8796100F5717B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,7 +1196,7 @@
 				FBD88D428A0B47D39A88FA1A /* OpenSans-Regular.ttf in Resources */,
 				A20F6C2198D2403FADC306D4 /* OpenSans-SemiBold.ttf in Resources */,
 				5DCA361E5D014FFBB33DFF9C /* OpenSans-SemiBoldItalic.ttf in Resources */,
-				71D50BBE21C4188E0051729D /* GoogleService-Info.plist in Resources */,
+				71F1614B21C8796100F5717B /* GoogleService-Info.plist in Resources */,
 				69FD46FDE7A444EA8E63DF6E /* Dosis-Bold.ttf in Resources */,
 				B10B76182CA9476F9EA1EF51 /* Dosis-ExtraBold.ttf in Resources */,
 				5FB95DD886AD4D828A7D4C00 /* Dosis-ExtraLight.ttf in Resources */,
@@ -1212,7 +1212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
-				71D50BC021C4188E0051729D /* GoogleService-Info.plist in Resources */,
+				71F1614D21C8796100F5717B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,7 +1220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71D50BC121C4188E0051729D /* GoogleService-Info.plist in Resources */,
+				71F1614E21C8796100F5717B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
