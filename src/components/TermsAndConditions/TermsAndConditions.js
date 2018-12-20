@@ -47,7 +47,7 @@ export default class TermsAndConditions extends PureComponent<Props> {
             fontSpacing="medium"
             fontColor="white"
           >
-            OPT IN: By entering the sweepstakes, I agree to the sweepstakes’ Official Rules. I also agree to receive email communication and special offers from The Dyrt and Renogy.
+            By entering the sweepstakes, I agree to the sweepstakes’ Official Rules. I also agree to receive email communication and special offers from The Dyrt and Renogy.
           </Text>
           <Text
             fontSize="h5"

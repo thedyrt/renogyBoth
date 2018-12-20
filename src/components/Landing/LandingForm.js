@@ -19,12 +19,10 @@ import {
 import styles from './LandingForm.css.js';
 
 type Props = {
-  acceptCondition: (id: 'acceptTerms' | 'acceptEmail') => void,
-  acceptEmail: true | void,
+  acceptCondition: (id: string) => void,
   acceptTerms: true | void,
   email?: string,
   onSubmit: () => void,
-  onSubmit: ({ email: string, acceptEmail: boolean }) => void,
   toggleViewTerms: () => void,
   updateEmail: (email: string) => void,
 };
@@ -35,7 +33,6 @@ export default class Landing extends PureComponent<Props> {
   render() {
     const {
       acceptCondition,
-      acceptEmail,
       acceptTerms,
       email,
       onSubmit,
@@ -86,42 +83,31 @@ export default class Landing extends PureComponent<Props> {
             id="email"
           />
         </View>
-        <WithValidations.Checkbox
-          checked={!!acceptTerms}
-          id="acceptTerms"
-          toggleChecked={acceptCondition}
-        >
-          <View style={styles.terms}>
+        <View style={styles.acceptTerms}>
+          <WithValidations.Checkbox
+            checked={!!acceptTerms}
+            id="acceptTerms"
+            toggleChecked={acceptCondition}
+          >
             <Text
               fontSize="h5"
             >
               I have read and accepted the &nbsp;
             </Text>
-            <TouchableOpacity
-              onPress={toggleViewTerms}
-              activeOpacity={1}
-            >
-              <Text
-                fontSize="h5"
-                fontColor="gold"
-              >
-                terms and conditions
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </WithValidations.Checkbox>
-        <Checkbox
-          checked={!!acceptEmail}
-          id="acceptEmail"
-          toggleChecked={acceptCondition}
-        >
-          <Text
-            fontSize="h5"
-            fontAlignment="left"
+          </WithValidations.Checkbox>
+          <TouchableOpacity
+            onPress={toggleViewTerms}
+            activeOpacity={1}
+            style={styles.viewConditions}
           >
-            I agree to recieve info via email about future giveaways and promotions from Renogy and The Dyrt.
-          </Text>
-        </Checkbox>
+            <Text
+              fontSize="h5"
+              fontColor="gold"
+            >
+              terms and conditions
+            </Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.footer}>
           <Button
             onPress={onSubmit}

@@ -13,7 +13,7 @@ exports.onUserAdded = functions.firestore
     const user = snapshot.data();
 
     return Promise.all([
-      user.emailOptIn ? addToMailingList(user) : Promise.resolve(),
+      addToMailingList(user),
       user.phoneNumber ? requestAppDownload(user) : Promise.resolve(),
     ]);
   });
