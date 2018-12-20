@@ -2,9 +2,7 @@ const functions = require('firebase-functions');
 
 const admin = require('firebase-admin');
 
-var rp = require('request-promise');
-
-// const request = require('request');
+const rp = require('request-promise');
 
 // initializes your application
 admin.initializeApp(functions.config().firebase);
@@ -15,16 +13,16 @@ exports.onUserAdded = functions.firestore
     const user = snapshot.data();
 
     return Promise.all([
-      user.emailOptIn ? addToMailingList(user) : Promise.resolve(),
-      user.phoneNumeer ? requestAppDownload(user) : Promise.resolve(),
+      addToMailingList(user),
+      user.phoneNumber ? requestAppDownload(user) : Promise.resolve(),
     ]);
   });
 
-const iterableUrl = 'https://api.iterable.com/api';
+const iterableUrl =  functions.config().iterable.url;
 
-const apiKey = '2b4b5f8d652f44d186c0965c08f22f6f';
+const apiKey = functions.config().iterable.key;
 
-const listName = 'renogyBooth';
+const listName = functions.config().iterable.list;
 
 const platform = 'mobile';
 
@@ -37,7 +35,6 @@ const iterableOptions = {
 }
 
 function addToMailingList(user) {
-  console.log('adding to mailing list', user.email);
     rp(
       Object.assign(
         {
@@ -53,17 +50,16 @@ function addToMailingList(user) {
         },
         iterableOptions
       )
-    ).then(() => {
-      console.log('SUCCESS');
+    ).then((result) => {
+      console.log(`Added ${user.email} to mailing list code: ${result.code}`);
       return true;
     })
     .catch((error) => {
-      console.log('ERROR', error.message);
+      console.log(`Add to mailing list error: ${error.message}`);
     });
 }
 
 function requestAppDownload(user) {
-  console.log('request to download', user.email);
   rp(
     Object.assign(
       {
@@ -80,11 +76,12 @@ function requestAppDownload(user) {
       },
       iterableOptions
     )
-  ).then(() => {
-    console.log('SUCCESS');
+  ).then((result) => {
+    console.log(`Request app download for ${user.email} code: ${result.code}`);
+    console.log(result.code);
     return true;
   })
   .catch((error) => {
-    console.log('ERROR', error);
+    console.log(`Request app dowload errorr: ${error.message}`);
   });
 }

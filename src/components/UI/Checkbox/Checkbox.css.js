@@ -8,10 +8,7 @@ import standards from 'constants/standards';
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginBottom: standards.margin,
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    width: '100%',
   },
   iconContainer: {
     alignItems: 'center',

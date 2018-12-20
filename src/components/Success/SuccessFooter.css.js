@@ -7,7 +7,7 @@ import standards from 'constants/standards';
 export default StyleSheet.create({
   container: {
     width: standards.windowWidth,
-    height: standards.windowHeight / 2.3,
+    height: standards.windowHeight / 2.5,
     paddingHorizontal: standards.paddingLarge,
     paddingBottom: standards.paddingLarge,
     justifyContent: 'center',

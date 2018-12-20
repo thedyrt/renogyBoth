@@ -13,15 +13,19 @@ export default StyleSheet.create({
     paddingHorizontal: standards.gutter,
   },
   input: {
-    marginBottom: standards.margin,
     width: '100%',
-  },
-  terms: {
-    flexDirection: 'row',
   },
   footer: {
     alignItems: 'center',
-    marginTop: standards.marginLarge,
-    marginBottom: standards.offset,
+    marginVertical: standards.marginLarge,
+  },
+  acceptTerms: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    width: '100%',
+    marginTop: standards.margin,
+  },
+  viewConditions: {
+    justifyContent: 'center',
   },
 });

@@ -21,14 +21,12 @@ type Props = {
 };
 
 type State = {
-  acceptEmail: true | void,
   acceptTerms: true | void,
   email?: string,
   isViewingTerms: boolean,
 };
 
 const cleanState = ({
-  acceptEmail: true,
   acceptTerms: undefined,
   isViewingTerms: false,
   email: '',
@@ -67,7 +65,6 @@ export default class Landing extends PureComponent<Props, State> {
         // $FlowFixMe validations
         onSubmit({
           email: state.email,
-          emailOptIn: !!state.acceptEmail,
         });
 
         validate(
@@ -101,7 +98,7 @@ export default class Landing extends PureComponent<Props, State> {
   }
 
   @boundMethod
-  acceptCondition(id: 'acceptTerms' | 'acceptEmail') {
+  acceptCondition(id: string) {
     const { validate } = this.props;
     const { state } = this;
 

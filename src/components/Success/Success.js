@@ -23,7 +23,7 @@ type State = {
   lineNumber?: string,
 };
 
-const INACTVE_THRESHOLD = 6000;
+const INACTVE_THRESHOLD = 7000;
 
 export default class Landing extends PureComponent<Props, State> {
   inactiveTimeout: any;
@@ -110,17 +110,21 @@ export default class Landing extends PureComponent<Props, State> {
   render() {
     const {
       validate,
+      onInactive,
     } = this.props;
 
     return (
-      <ContentContainer FooterComponent={SuccessFooter}>
-        <SuccessForm
-          updatePhoneNumber={this.updatePhoneNumber}
-          onSubmit={this.onSubmit}
-          validate={validate}
-          {...this.state}
-        />
-      </ContentContainer>
+      <>
+        <ContentContainer FooterComponent={SuccessFooter}>
+          <SuccessForm
+            onInactive={onInactive}
+            onSubmit={this.onSubmit}
+            updatePhoneNumber={this.updatePhoneNumber}
+            validate={validate}
+            {...this.state}
+          />
+        </ContentContainer>
+      </>
     );
   }
 }
