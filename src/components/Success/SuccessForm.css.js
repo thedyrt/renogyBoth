@@ -9,8 +9,10 @@ export default StyleSheet.create({
   form: {
     backgroundColor: colors.primaryMuted,
     alignItems: 'center',
-    paddingHorizontal: standards.paddingLarge,
-    paddingVertical: standards.paddingLarge,
+    paddingHorizontal: standards.padding,
+    paddingBottom: standards.paddingLarge,
+    paddingTop: standards.padding,
+    // paddingVertical: standards.paddingLarge,
   },
   inputs: {
     flexDirection: 'row',
@@ -25,5 +27,14 @@ export default StyleSheet.create({
   error: {
     justifyContent: 'center',
     marginBottom: standards.marginMedium,
+  },
+  back: {
+    width: '100%',
+    alignItems: 'flex-end',
+  },
+  backButton: {
+    width: 30,
+    height: 30,
+    tintColor: colors.white,
   },
 });

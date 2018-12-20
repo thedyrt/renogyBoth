@@ -9,7 +9,6 @@ import {
 
 import {
   Button,
-  Checkbox,
   Text,
 } from 'UI';
 import {
@@ -41,6 +40,7 @@ export default class Landing extends PureComponent<Props> {
     } = this.props;
 
     return (
+
       <KeyboardAvoidingView
         style={styles.form}
         behavior="padding"

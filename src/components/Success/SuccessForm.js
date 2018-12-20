@@ -4,6 +4,8 @@ import React, { PureComponent } from 'react';
 import {
   View,
   KeyboardAvoidingView,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import { boundMethod } from 'autobind-decorator';
@@ -19,12 +21,13 @@ import {
 import styles from './SuccessForm.css.js';
 
 type Props = {
+  areaCode?: string,
+  lineNumber?: string,
+  onInactive: () => void,
   onSubmit: () => void,
+  prefix?: string,
   updatePhoneNumber: (value: string, id: string) => void,
   validate: Validate,
-  areaCode?: string,
-  prefix?: string,
-  lineNumber?: string,
 };
 
 const nextInput = {
@@ -86,8 +89,9 @@ export default class Landing extends PureComponent<Props> {
     const {
       areaCode,
       lineNumber,
-      prefix,
+      onInactive,
       onSubmit,
+      prefix,
     } = this.props;
 
     return (
@@ -95,6 +99,15 @@ export default class Landing extends PureComponent<Props> {
         behavior="padding"
       >
         <View style={styles.form}>
+          <TouchableOpacity
+            style={styles.back}
+            onPress={onInactive}
+          >
+            <Image
+              source={{ uri: 'close' }}
+              style={styles.backButton}
+            />
+          </TouchableOpacity>
           <Text
             fontFamily="dosis"
             fontSize="h1"

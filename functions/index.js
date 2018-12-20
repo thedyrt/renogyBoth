@@ -18,11 +18,11 @@ exports.onUserAdded = functions.firestore
     ]);
   });
 
-const iterableUrl = 'https://api.iterable.com/api/';
+const iterableUrl =  functions.config().iterable.url;
 
-const apiKey = 'c4c87f17ec114d7b91c08bd391c1041a';
+const apiKey = functions.config().iterable.key;
 
-const listName = 'renogyBooth';
+const listName = functions.config().iterable.list;
 
 const platform = 'mobile';
 
@@ -35,7 +35,6 @@ const iterableOptions = {
 }
 
 function addToMailingList(user) {
-  console.log('adding to mailing list', user.email);
     rp(
       Object.assign(
         {
@@ -51,17 +50,16 @@ function addToMailingList(user) {
         },
         iterableOptions
       )
-    ).then(() => {
-      console.log('SUCCESS');
+    ).then((result) => {
+      console.log(`Added ${user.email} to mailing list code: ${result.code}`);
       return true;
     })
     .catch((error) => {
-      console.log('ERROR', error.message);
+      console.log(`Add to mailing list error: ${error.message}`);
     });
 }
 
 function requestAppDownload(user) {
-  console.log('request to download', user.email);
   rp(
     Object.assign(
       {
@@ -78,11 +76,12 @@ function requestAppDownload(user) {
       },
       iterableOptions
     )
-  ).then(() => {
-    console.log('SUCCESS');
+  ).then((result) => {
+    console.log(`Request app download for ${user.email} code: ${result.code}`);
+    console.log(result.code);
     return true;
   })
   .catch((error) => {
-    console.log('ERROR', error);
+    console.log(`Request app dowload errorr: ${error.message}`);
   });
 }
