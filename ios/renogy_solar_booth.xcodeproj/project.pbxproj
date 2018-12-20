@@ -661,7 +661,6 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				968C666F00E242369E0DED94 /* Resources */,
 				71ECD26221C41AA7000D5F0E /* Recovered References */,
-				49ADB68828ACB50E8D969F8A /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -682,6 +681,7 @@
 		968C666F00E242369E0DED94 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				49ADB68828ACB50E8D969F8A /* Pods */,
 				EFE1DEC426044A498C2C5482 /* OpenSans-Bold.ttf */,
 				B1D1DEA338A641D8AF86874A /* OpenSans-BoldItalic.ttf */,
 				241ABE9798DA4D58AD52375B /* OpenSans-ExtraBold.ttf */,
