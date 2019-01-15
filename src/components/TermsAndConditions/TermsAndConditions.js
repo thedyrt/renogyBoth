@@ -85,7 +85,7 @@ export default class TermsAndConditions extends PureComponent<Props> {
           />
           <Condition
             heading="Sponsor:"
-            terms="The Sweepstakes is sponsored by The Dyrt, Inc. at 220 NW 8th Ave, Portland, OR, 97209."
+            terms="The Sweepstakes is sponsored by The Dyrt, Inc. at 220 NW 8th Ave, Portland, OR, 97209. When Contest participation is available in our iOS and Android apps, no involvement in the Contest from Apple or Google is implied."
           />
           <Condition
             heading="Agreement to Official Rules:"
