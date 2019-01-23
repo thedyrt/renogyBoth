@@ -66,7 +66,7 @@ export default class Landing extends PureComponent<Props> {
           fontSize="h3"
           fontSpacing="medium"
         >
-          Every month for 12 months, Renogy is giving away a $500 Renogy gift card to one luck winner.
+          Every month for 12 months, Renogy is giving away a $500 Renogy gift card to one lucky winner.
         </Text>
         <View style={styles.input}>
           <WithValidations.TextInput
