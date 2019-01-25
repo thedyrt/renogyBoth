@@ -23,7 +23,7 @@ type State = {
   lineNumber?: string,
 };
 
-const INACTVE_THRESHOLD = 7000;
+const INACTVE_THRESHOLD = 20000;
 
 export default class Landing extends PureComponent<Props, State> {
   inactiveTimeout: any;
